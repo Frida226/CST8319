@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 
 <title>Sign In For Flower Shop</title>
-<script src="javascript/script.js"></script>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -34,12 +33,9 @@
 								<input type="password" name="password" id="password"
 									placeholder="Password" />
 							</div>
-							<div class="form-group">
-								<input type="checkbox" name="remember-me" id="remember-me"
-									class="agree-term" /> 
-									<label for="remember-me" class="label-agree-term">
-									<span><span></span></span>Remember me</label>
-							</div>
+							<div class="form-group">                               
+                            	<img src="images/flower1.jpg" alt="flower image" class="flower-image">                                                               
+                            </div>
 							<div class="form-group form-button">
 								<input type="submit" name="signin" id="signin"
 									class="form-submit" value="Log in" />
@@ -50,6 +46,17 @@
 			</div>
 		</section>
 	</div>
+<script>
+    window.onload = function() {
+        showLoginMessage();
+    };
 
+    function showLoginMessage() {
+        var loginStatus  = document.getElementById("status").value;
+        if (loginStatus === "failed") {
+            alert('Sorry, wrong username or password.');
+        }
+    }
+</script>
 </body>
 </html>

@@ -8,7 +8,8 @@ import java.sql.SQLException;
 import com.flowerorder.model.Users;
 import com.flowerorder.util.DBConnection;
 
-public class UsersDAO {
+public class UsersDaoImpl implements UsersDao{
+	@Override
     public boolean registerUser(Users user) throws SQLException {
         String query = "INSERT INTO users (username, password, email, phonenumber) VALUES (?, ?, ?, ?)";
         try (
@@ -23,6 +24,7 @@ public class UsersDAO {
         }
     }
     
+	@Override
     public Users login(String username, String password) throws SQLException {
         String query = "SELECT * FROM users WHERE username = ? AND password = ?";
         try (Connection con = DBConnection.getConnection(); 

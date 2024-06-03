@@ -14,12 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.flowerorder.dao.UsersDAO;
+import com.flowerorder.dao.UsersDao;
+import com.flowerorder.dao.UsersDaoImpl;
 import com.flowerorder.model.Users;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	UsersDao usersDao = new UsersDaoImpl(); 
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -30,10 +32,8 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();		
 		RequestDispatcher dispatcher = null;
 		
-		UsersDAO userDAO = new UsersDAO();
-		
 		try {
-			Users users = userDAO.login(uname, upwd);
+			Users users = usersDao.login(uname, upwd);
 			if(users != null){
 				session.setAttribute("name", users.getUsername());
 				dispatcher = request.getRequestDispatcher("index.jsp");
