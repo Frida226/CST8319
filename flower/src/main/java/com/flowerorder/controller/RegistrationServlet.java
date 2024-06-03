@@ -1,4 +1,4 @@
-package flowerorder.registration;
+package com.flowerorder.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,14 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class RegistrationServlet
- */
+import com.flowerorder.dao.UsersDAO;
+import com.flowerorder.model.Users;
+
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    
+	private static final long serialVersionUID = 1L;   
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -31,19 +29,14 @@ public class RegistrationServlet extends HttpServlet {
 		String password = request.getParameter("pass");
 		String phonenumber = request.getParameter("contact");
 		RequestDispatcher dispatcher = null;
-		Connection con = null;
+		
+		 Users users = new Users(username, password, email, phonenumber);
+	     UsersDAO usersDAO = new UsersDAO();
+	        
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/flowershop?useSSL=false","root","Zxf980226!");
-			PreparedStatement pst = con.prepareStatement("insert into users(username, password, email, phonenumber)values(?,?,?,?)");
-			pst.setString(1, username);
-			pst.setString(2, password);
-			pst.setString(3, email);
-			pst.setString(4, phonenumber);
-			
-			int rowCount = pst.executeUpdate();
+			boolean result = usersDAO.registerUser(users);
 			dispatcher = request.getRequestDispatcher("registration.jsp");
-			if(rowCount > 0) {
+			if(result) {
 				request.setAttribute("status", "success");
 			}else {
 				request.setAttribute("status", "failed");
@@ -51,13 +44,8 @@ public class RegistrationServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+					 "An error occurred while processing your request.");
 		}
 	}
 

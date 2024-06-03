@@ -1,4 +1,4 @@
-package flowerorder.registration;
+package com.flowerorder.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class LoginServlet
- */
+import com.flowerorder.dao.UsersDAO;
+import com.flowerorder.model.Users;
+
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,16 +30,12 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();		
 		RequestDispatcher dispatcher = null;
 		
+		UsersDAO userDAO = new UsersDAO();
+		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/flowershop?useSSL=false","root","Zxf980226!");
-			PreparedStatement pst = con.prepareStatement("select * from users where username = ? and password = ?");
-			pst.setString(1, uname);
-			pst.setString(2, upwd);
-			
-			ResultSet rs = pst.executeQuery();
-			if(rs.next()){
-				session.setAttribute("name", rs.getString("username"));
+			Users users = userDAO.login(uname, upwd);
+			if(users != null){
+				session.setAttribute("name", users.getUsername());
 				dispatcher = request.getRequestDispatcher("index.jsp");
 			}else {
 				request.setAttribute("loginStatus", "failed");
@@ -48,6 +44,8 @@ public class LoginServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}catch(Exception e){
 			e.printStackTrace();
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, 
+					"An error occurred while processing your request.");
 		}
 		
 	}
