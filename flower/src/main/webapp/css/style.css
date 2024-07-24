@@ -486,25 +486,71 @@ footer nav a:hover {
 
 /* Contact Section */
 .contact {
+	background-image: url('../images/contact-background.jpg');
     padding: 2rem;
     background-color: #f4f4f4;
     text-align: center;
-    margin-bottom: 100px;
+    margin-bottom: 105px;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.contact p {
-    font-size: 1rem;
+.contact-success-content {
+	background-image: url('../images/contact-background.jpg');
+	background-size: cover;
+    padding: 2rem;
+    background-color: #f4f4f4;  
+    min-height: 89vh;
+    text-align: center;
 }
 
-.contact a {
-    color: #007bff;
-    text-decoration: none;
+/* Basic styling for form groups */
+.form-group {
+    margin-bottom: 15px;
 }
 
-.contact a:hover {
-    text-decoration: underline;
+/* Styling for form labels */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #6c757d;
 }
 
-.terms-of-service {
-	margin-bottom: 100px;
+/* Styling for form inputs and textarea */
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #333; /* Text color for better readability */
+}
+
+/* Specific styling for textarea */
+.form-group textarea {
+    resize: vertical;
+    height: 150px;
+}
+
+/* Styling for the submit button */
+.form-group.form-button {
+    text-align: center;
+}
+
+.form-submit {
+    background-color: #ff6f91;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: 'Georgia', serif;
+}
+
+.form-submit:hover {
+    background-color: #ceceff;
 }
