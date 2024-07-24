@@ -1,5 +1,7 @@
 package com.flowerorder.model;
 
+import java.sql.Timestamp;
+
 public class Users {
     private int id;
     private String username;
@@ -9,6 +11,8 @@ public class Users {
     private String firstName;
     private String lastName;
     private String address;
+    private Role role; 
+    private Timestamp created_at;
 
     public Users() {}
 
@@ -95,6 +99,22 @@ public class Users {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Timestamp getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
     }
 }
 
