@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.flowerorder.dao.ProductDao;
 import com.flowerorder.dao.ProductDaoImpl;
-import com.flowerorder.model.Product;
+import com.flowerorder.model.Products;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,7 +28,7 @@ public class HomeServlet extends HttpServlet {
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> products = productDao.getLatestProducts();
+        List<Products> products = productDao.getLatestProducts();
         request.setAttribute("products", products);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
