@@ -54,7 +54,7 @@ body {
   overflow: hidden; }
 
 .signup-image {
-  margin: 0 75px; }
+  margin: 10 55px; }
 
 .form-title {
   margin-bottom: 33px; }
@@ -551,6 +551,7 @@ footer nav a:hover {
 /* Styling for the submit button */
 .form-group.form-button {
     text-align: center;
+    display: inline-block;
 }
 
 .form-submit {
