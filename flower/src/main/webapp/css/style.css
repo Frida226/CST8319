@@ -484,6 +484,10 @@ footer nav a:hover {
     max-width: 800px;
 }
 
+.terms-of-service{
+	margin-bottom: 50px;
+}
+
 /* Contact Section */
 .contact {
 	background-image: url('../images/contact-background.jpg');
