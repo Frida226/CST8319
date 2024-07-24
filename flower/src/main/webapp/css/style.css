@@ -490,6 +490,15 @@ footer nav a:hover {
 
 /* Contact Section */
 .contact {
+    padding: 2rem;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin-bottom: 105px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.contact1 {
 	background-image: url('../images/contact-background.jpg');
     padding: 2rem;
     background-color: #f4f4f4;

@@ -10,7 +10,7 @@
 <jsp:include page="header.jsp" />
 
 <div class="main-contact">
-    <section class="contact">
+    <section class="contact1">
         <div class="container">
             <div class="contact-content">
                 <div class="contact-form">
