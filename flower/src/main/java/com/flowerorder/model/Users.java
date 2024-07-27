@@ -1,29 +1,42 @@
 package com.flowerorder.model;
 
+import java.sql.Timestamp;
+
 public class Users {
-	private int id;
+    private int id;
     private String username;
-    private String password;
+    private String passwordHash;
     private String email;
     private String phoneNumber;
-    
+    private String firstName;
+    private String lastName;
+    private String address;
+    private Role role; 
+    private Timestamp created_at;
+
     public Users() {}
-    
-    public Users(String username, String password, String email, String phoneNumber) {
+
+    public Users(String username, String passwordHash, String email, String phoneNumber, String firstName, String lastName, String address) {
         this.username = username;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
     }
-    
-    public Users(int id, String username, String password, String email, String phoneNumber) {
+
+    public Users(int id, String username, String passwordHash, String email, String phoneNumber, String firstName, String lastName, String address) {
         this.id = id;
         this.username = username;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -40,12 +53,12 @@ public class Users {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public String getEmail() {
@@ -63,5 +76,46 @@ public class Users {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
     
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Timestamp getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
+    }
 }
+
+
