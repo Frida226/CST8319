@@ -11,7 +11,7 @@
 
 <div class="main-contact">
     <section class="contact1">
-        <div class="container">
+        <div class="container2">
             <div class="contact-content">
                 <div class="contact-form">
                     <h2 class="form-title">Contact Us</h2>

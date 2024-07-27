@@ -39,9 +39,21 @@ body {
 
 .container {
   width: 900px;
-  background: #fff;
+  background: #ffffff;
   margin: 0 auto;
   border-radius: 20px;}
+
+.container1 {
+    width: 80%;      
+    margin: 0 auto;  
+    padding: 20px;   
+    background-color: #f8f8f8; }
+
+.container2 {
+    width: 900px;
+  	background: #f8f8f8;
+  	margin: 0 auto;
+  	border-radius: 20px;}
 
 .signup {
   margin-bottom: 50px; }
