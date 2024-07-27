@@ -9,7 +9,7 @@
 
 <div class="main-contact">
     <section class="contact-success">
-        <div class="container">
+        <div class="container2">
             <div class="contact-success-content">
                 <h2>Thank you!</h2>
                 <p>Your message has been successfully sent. We will get back to you soon.</p>

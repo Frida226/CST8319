@@ -11,7 +11,7 @@
 
     <div class="main">
         <section class="terms-of-service">
-            <div class="container">
+            <div class="container1">
                 <div class="terms-content">
                     <h2>Terms of Service</h2>
                     <p>Welcome to Flower Shop. Please read these Terms of Service ("Terms", "Terms of Service") carefully before using the Flower Shop website (the "Service") operated by Flower Shop ("us", "we", or "our").</p>
