@@ -58,9 +58,9 @@ public class UsersDaoImplTest {
     @Test
     public void testRegisterUser() throws SQLException {
         // Call the method to test
-        Users user = usersDao.login("testUser");
+        Users user = usersDao.login("testuser");
         assertNotNull("User should not be null", user);
-        assertEquals("testUser", user.getUsername());
+        assertEquals("testuser", user.getUsername());
     }
 
     @After
