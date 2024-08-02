@@ -89,14 +89,17 @@ public class ProductServlet extends HttpServlet {
         response.sendRedirect("manageInventory.jsp"); // Redirect to the inventory page or wherever appropriate
     }
 
-    private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Similar to addProduct, but with existing product_id
         int productId = Integer.parseInt(request.getParameter("product_id"));
         Products product = new Products(productId, request.getParameter("name"), request.getParameter("description"), 
             Double.parseDouble(request.getParameter("price")), request.getParameter("category"), request.getParameter("image_url"), 
             Integer.parseInt(request.getParameter("stock")));
         productsDao.updateProduct(product);
-        response.sendRedirect("manageInventory.jsp");
+//        response.sendRedirect("manageInventory.jsp");
+        request.setAttribute("product", product);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("editProduct.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
