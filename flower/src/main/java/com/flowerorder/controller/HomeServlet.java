@@ -5,9 +5,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.flowerorder.dao.ProductDao;
-import com.flowerorder.dao.ProductDaoImpl;
+import com.flowerorder.dao.ProductsDao;
+import com.flowerorder.dao.ProductsDaoImpl;
 import com.flowerorder.model.Products;
 
 import java.io.IOException;
@@ -16,20 +17,28 @@ import java.util.List;
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
 
+	// the serialVersionUID serves as an explicit version control mechanism 
+	// to handle the serialization and deserialization of classes,
     private static final long serialVersionUID = 1L;
-    
-    private ProductDao productDao;
+    // DAO for handling product data operations
+    private ProductsDao productsDao;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        // Initialize ProductDao using dependency injection or factory method
-        productDao = new ProductDaoImpl();
+        // Initialize ProductDao using a factory method or direct instantiation
+        productsDao = new ProductsDaoImpl();
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Products> products = productDao.getLatestProducts();
+        HttpSession session = request.getSession();
+//        Integer userId = (Integer) session.getAttribute("userId");
+        String userRole = (String) session.getAttribute("userRole");
+    	// Fetch the latest products from the database
+    	List<Products> products = productsDao.listAllFoodItemsByUser(userRole);
+    	// Set the products as a request attribute to be accessible in the JSP
         request.setAttribute("products", products);
+        // Forward the request to the "index.jsp" page which will display the products
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

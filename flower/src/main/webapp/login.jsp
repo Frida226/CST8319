@@ -36,6 +36,20 @@
 							<div class="form-group">                               
                             	<img src="images/flower1.jpg" alt="flower image" class="flower-image">                                                               
                             </div>
+                            
+                            <div class="form-group">
+    							<label for="role">Choose Your Role:</label>
+    							<select name="role" id="role">
+        							<option value="user">User</option>
+        							<option value="admin">Admin</option>
+    							</select>
+							</div>
+                            
+<!--                            	<div class="form-group notification-group">
+        						<input type="checkbox" name="notification" id="notification">
+        						<label for="notification">Receive notifications?</label>
+    						</div> -->
+                            
 							<div class="form-group form-button">
 								<input type="submit" name="signin" id="signin"
 									class="form-submit" value="Log in" />

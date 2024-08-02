@@ -5,11 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/flowershop?useSSL=false";
+//    private static final String URL = "jdbc:mysql://localhost:3306/flowershop?useSSL=false";
+    private static final String URL = "jdbc:mysql://localhost:3305/flowershop?useSSL=false";
     // Change this to your database username
     private static final String USER = "root";
     // Change this to your database password
-    private static final String PASSWORD = "Zxf980226!";
+//    private static final String PASSWORD = "Zxf980226!";
+    private static final String PASSWORD = "8011";
     
     static {
         try {

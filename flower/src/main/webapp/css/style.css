@@ -577,6 +577,11 @@ footer nav a:hover {
     font-family: 'Georgia', serif;
 }
 
+.notification-group input[type="checkbox"] + label {
+    display: inline-block;
+    margin-left: 0px;
+}
+
 .form-submit:hover {
     background-color: #ceceff;
 }

@@ -31,6 +31,7 @@ public class RegistrationServlet extends HttpServlet {
         String firstName = request.getParameter("first_name");
         String lastName = request.getParameter("last_name");
         String address = request.getParameter("address");
+        boolean subscribe = request.getParameter("subscribe") != null; // Check if the subscribe checkbooks was checked
         RequestDispatcher dispatcher = null;
 
         String passwordHash = hashPassword(password);
@@ -41,11 +42,14 @@ public class RegistrationServlet extends HttpServlet {
             boolean result = usersDao.registerUser(user);
             dispatcher = request.getRequestDispatcher("registration.jsp");
             if (result) {
+                request.getSession().setAttribute("subscribe", subscribe); // Store subscription preference in the session
                 request.setAttribute("status", "success");
+                response.sendRedirect("login.jsp"); // Redirect to login page after successful registration
             } else {
                 request.setAttribute("status", "failed");
+                request.getRequestDispatcher("registration.jsp").forward(request, response);
             }
-            dispatcher.forward(request, response);
+//            dispatcher.forward(request, response);
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "SQL Error during registration", e);
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing your request.");

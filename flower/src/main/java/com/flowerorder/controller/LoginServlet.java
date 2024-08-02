@@ -21,17 +21,26 @@ public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     UsersDao usersDao = new UsersDaoImpl();
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uname = request.getParameter("username");
         String upwd = request.getParameter("password");
+        String role = request.getParameter("role").trim().toUpperCase(); // Clean and standardize the role input
+
         HttpSession session = request.getSession();        
         RequestDispatcher dispatcher = null;
 
         try {
-            Users users = usersDao.login(uname);
-            if(users != null && checkPassword(upwd, users.getPasswordHash())){
-                session.setAttribute("name", users.getUsername());
-                dispatcher = request.getRequestDispatcher("index.jsp");
+            Users loginUser = usersDao.login(uname);//take a special name show its login function!
+            if(loginUser != null && checkPassword(upwd, loginUser.getPasswordHash())){
+                session.setAttribute("name", loginUser.getUsername());
+                session.setAttribute("role", loginUser.getRole()); // Store Role enum directly and will used at listAllProductByRole later!! 
+                // get a NULL role because the users(loginUser) has no role attribute who was returned by usersDao.login(uname);!!
+                
+                if ("ADMIN".equals(role)){// this role is retrieved from above String variable role which get from input on jsp page! 
+                    dispatcher = request.getRequestDispatcher("admin.jsp");
+                } else if ("USER".equals(role)) {
+                    dispatcher = request.getRequestDispatcher("index.jsp");
+                }
             } else {
                 request.setAttribute("loginStatus", "failed");
                 dispatcher = request.getRequestDispatcher("login.jsp");
