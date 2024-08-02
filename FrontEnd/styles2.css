@@ -1,0 +1,377 @@
+/* General reset and body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4; /* Light background for better contrast */
+}
+
+/* Header styling */
+.site-header {
+    background: url('images/cover.png') no-repeat center center fixed;
+    background-size: 100%;
+    color: #000000;
+    text-align: center;
+    padding: 20px;
+}
+
+.site-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+/* Navbar styling */
+.navbar {
+    margin-bottom: 20px;
+}
+
+.navbar-brand {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #FF69B4;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* Jumbotron styling */
+.jumbotron {
+    margin-bottom: 0;
+    padding: 100px 20px;
+    color: white;
+    background: url('images/cover.png') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+}
+
+.jumbotron .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.jumbotron .container {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-primary {
+    background-color: #FF69B4;
+    border: none;
+    border-radius: 0.25rem;
+}
+
+.btn-primary:hover {
+    background-color: #FF1493;
+}
+
+/* Container padding */
+.container {
+    padding: 20px;
+}
+
+/* Page sections */
+.page-section {
+    padding: 60px 0;
+}
+
+.page-section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Divider styling */
+.divider {
+    margin: 0 auto 30px;
+    width: 60px;
+    height: 5px;
+    background-color: #FF69B4;
+}
+
+/* Product list and item styling */
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    margin: 15px;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.product-item img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 15px;
+}
+
+.product-item h3 {
+    font-size: 1.5rem;
+    color: #FF69B4;
+    margin-bottom: 10px;
+}
+
+.product-item p {
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Footer styling */
+footer {
+    background: url('images/cover.png') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 20px;
+}
+
+footer .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+footer p {
+    position: relative;
+    z-index: 1;
+}
+
+/* General card styles */
+.card {
+    border: none;
+    border-radius: .5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+
+.card-body {
+    padding: 1rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: .75rem;
+    color: #FF69B4;
+}
+
+.card-text {
+    color: #666;
+}
+
+/* Modal styling */
+.modal-content {
+    border-radius: .5rem;
+}
+
+.modal-header {
+    background: #FF69B4;
+    color: white;
+    border-bottom: none;
+}
+
+.modal-footer {
+    border-top: 1px solid #ddd;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+}
+
+/* About Us Section */
+.about-intro, .mission-vision, .history {
+    background: url('images/cover.png') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    padding: 60px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.about-intro h2, .mission-vision h2, .history h2 {
+    color: #FF69B4;
+}
+
+.about-intro p, .mission-vision p, .history p {
+    font-size: 1.1rem;
+    color: #000000;
+    line-height: 1.6;
+}
+
+/* Team Section */
+.team {
+    background: url('images/team-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: rgb(8, 8, 8);
+    padding: 60px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.team h2 {
+    color: #000000;
+    text-align: center;
+}
+
+.team-member {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.team-member h3 {
+    font-size: 1.5rem;
+    color: #ff0080;
+}
+
+.team-member p {
+    font-size: 1.1rem;
+    color: #000000;
+}
+
+/* Contact Us Section */
+.contact {
+    background: url('images/contact-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: rgb(0, 0, 0);
+    padding: 60px 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.contact h2 {
+    color: #FF69B4;
+}
+
+.contact p {
+    font-size: 1.1rem;
+    color: #030303;
+}
+
+.contact a {
+    color: #FF69B4;
+    text-decoration: none;
+}
+
+.contact a:hover {
+    text-decoration: underline;
+}
+
+/* Form Styling */
+.signup-form, .login-form {
+    background: url('images/signup-image.jpg') no-repeat center;
+    background-color: white;
+    background-size: 100%;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.signup-form h2, .login-form h2 {
+    margin-bottom: 20px;
+    color: #000000;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: #FF69B4;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #FF1493;
+}
+
+.signup-form p, .login-form p {
+    text-align: center;
+    color: black;
+}
+
+.signup-form a, .login-form a {
+    color: #1900ff;
+    text-decoration: none;
+}
+
+.signup-form a:hover, .login-form a:hover {
+    text-decoration: underline;
+}
+
+/* Footer styling */
+footer {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+footer p {
+    margin: 0;
+    color: #333;
+}
