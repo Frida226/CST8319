@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.flowerorder.model.Role;
 import com.flowerorder.model.Users;
 import com.flowerorder.util.DBConnection;
 
@@ -37,8 +38,27 @@ public class UsersDaoImpl implements UsersDao {
     }
 
     @Override
+    public boolean registerAdmin(Users admin) throws SQLException {
+        String query = "INSERT INTO users (username, password_hash, email, role ) VALUES (?, ?, ?, ?)";
+        try (
+            Connection con = DBConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setString(1, admin.getUsername());
+            pst.setString(2, admin.getPasswordHash());
+            pst.setString(3, admin.getEmail());
+            pst.setString(4, admin.getRole().toString());
+            
+            logger.log(Level.INFO, "Executing query: {0}", pst);
+            int rowCount = pst.executeUpdate();
+            return rowCount > 0;
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error registering user", e);
+            throw e;
+        }
+    }
+    @Override
     public Users login(String username) throws SQLException {
-        String query = "SELECT * FROM users WHERE username = ?";
+        String query = "SELECT username, password_hash, role FROM users WHERE username = ?";
         try (Connection con = DBConnection.getConnection(); 
              PreparedStatement pst = con.prepareStatement(query)) {
             pst.setString(1, username);
@@ -46,14 +66,9 @@ public class UsersDaoImpl implements UsersDao {
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 return new Users(
-                    rs.getInt("user_id"),
                     rs.getString("username"), 
                     rs.getString("password_hash"),
-                    rs.getString("email"), 
-                    rs.getString("phone_number"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("address")
+                    Role.fromString(rs.getString("role"))// Convert string to Role enum here！！
                 );
             }
         } catch (SQLException e) {
