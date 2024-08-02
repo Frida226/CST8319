@@ -12,7 +12,28 @@ public class Products {
     private int stock;
     private Timestamp created_at;
 
-    // Getters and setters
+	public Products() {	}
+	
+    public Products(String name, String description, double price, String category, String image_url, int stock) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.image_url = image_url;
+        this.stock = stock;
+    }
+
+    public Products(int product_id, String name, String description, double price, String category, String image_url, int stock) {
+        this.product_id = product_id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.image_url = image_url;
+        this.stock = stock;
+    }
+
+	// Getters and setters
     public int getProduct_id() {
         return product_id;
     }
