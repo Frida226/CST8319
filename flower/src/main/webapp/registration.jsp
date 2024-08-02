@@ -52,6 +52,12 @@
                             <input type="tel" name="contact" id="contact"
                                 placeholder="xxx-xxx-xxxx" required/>
                         </div>
+                        
+                   		<div class="form-group">
+        					<input type="checkbox" name="subscribe" id="subscribe">
+        					<label for="subscribe">Subscribe to email notifications</label>
+    					</div>
+                        
                         <div class="form-group form-button">
                             <input type="submit" name="signup" id="signup"
                                 class="form-submit" value="Register" />
