@@ -1,3 +1,9 @@
+<% if (request.getAttribute("message") != null) { %>
+    <div style="color: green;"><%= request.getAttribute("message") %></div>
+<% } %>
+<% if (request.getAttribute("errorMessage") != null) { %>
+    <div style="color: red;"><%= request.getAttribute("errorMessage") %></div>
+<% } %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +14,7 @@
 </head>
 <body>
     <h1>Edit Product</h1>
-    <form action="ProductServlet" method="post">
+    <form action="manageInventory" method="post">
         <input type="hidden" name="action" value="update">
         <input type="hidden" name="product_id" value="${product.product_id}">
 
@@ -31,6 +37,7 @@
         <input type="number" id="stock" name="stock" value="${product.stock}" required>
 
         <input type="submit" value="Update Product">
+        <a href="manageInventory.jsp">Cancel</a>
     </form>
 </body>
 </html>

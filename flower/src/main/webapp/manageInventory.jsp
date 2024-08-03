@@ -1,3 +1,9 @@
+<% if (request.getAttribute("message") != null) { %>
+    <div style="color: green;"><%= request.getAttribute("message") %></div>
+<% } %>
+<% if (request.getAttribute("errorMessage") != null) { %>
+    <div style="color: red;"><%= request.getAttribute("errorMessage") %></div>
+<% } %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.flowerorder.model.Products" %>
@@ -61,12 +67,13 @@
                 <td><img src="<%= product.getImage_url() %>" alt="Product Image" style="width: 50px; height: auto;"></td>
                 <td><%= product.getStock() %></td>
                 <td>
-                    <form action="manageInventory" method="post">
+                    <form action="manageInventory" method="post" onsubmit="return confirm('Are you sure you want to delete this product?');">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
                         <input type="submit" value="Delete">
                     </form>
-                    <button onclick="populateEditForm(<%= product.getProduct_id() %>)">Edit</button>
+                   <%--  <button onclick="populateEditForm(<%= product.getProduct_id() %>)">Edit</button> --%>
+                    <a href="manageInventory?action=edit&product_id=<%= product.getProduct_id() %>" class="edit-btn">Edit</a>
                 </td>
             </tr>
             <% 
@@ -76,7 +83,7 @@
         </tbody>
     </table>
 
-    <script>
+     <script>
         function populateEditForm(productId) {
             // JavaScript function to populate and show an edit form
             // This could also be implemented by showing a modal or separate page

@@ -10,6 +10,7 @@ public interface ProductsDao {
     void deleteProduct(int productId);
     void addToWishlist(int userId, int productId, String productName, double productPrice, String productImage);
 	List<Products> listAllFoodItemsByUser( String userRole);
+	Products getProductById(int productId);
 
 }
 
