@@ -7,21 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.flowerorder.dao.ProductDao;
-import com.flowerorder.dao.ProductDaoImpl;
+import com.flowerorder.dao.ProductsDao;
+import com.flowerorder.dao.ProductsDaoImpl;
 
 @WebServlet("/wishlist")
 public class WishlistServlet extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
 
-    private ProductDao productDao;
+    private ProductsDao productDao;
 
     @Override
     public void init() throws ServletException {
         super.init();
         // Initialize ProductDao using dependency injection or factory method
-        productDao = new ProductDaoImpl();
+        ProductsDao productsDao = new ProductsDaoImpl();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
