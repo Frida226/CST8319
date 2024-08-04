@@ -10,7 +10,7 @@ import com.flowerorder.util.DBConnection;
 public class ProductsDaoImpl implements ProductsDao {
 
 	@Override
-	public List<Products> listAllFoodItemsByUser(String userRole){
+	public List<Products> listAllProductItemsByUser(String userRole){
 		List<Products> products = new ArrayList<>();
 		String sql = buildQueryBasedOnUserType(userRole);
 		System.out.println("Executing SQL: " + sql); //add logging!
@@ -97,6 +97,31 @@ public class ProductsDaoImpl implements ProductsDao {
         }
     }
 
+    @Override
+    public Products getProductById(int productId) {
+        Products product = null;
+        String sql = "SELECT * FROM products WHERE product_id = ?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setInt(1, productId);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                product = new Products();
+                product.setProduct_id(rs.getInt("product_id"));
+                product.setName(rs.getString("name"));
+                product.setDescription(rs.getString("description"));
+                product.setPrice(rs.getDouble("price"));
+                product.setCategory(rs.getString("category"));
+                product.setImage_url(rs.getString("image_url"));
+                product.setStock(rs.getInt("stock"));
+                product.setCreated_at(rs.getTimestamp("created_at"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
+    
     @Override
     public void deleteProduct(int productId) {
         String sql = "DELETE FROM products WHERE product_id = ?";

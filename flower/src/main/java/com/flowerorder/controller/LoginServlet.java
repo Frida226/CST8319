@@ -24,7 +24,6 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uname = request.getParameter("username");
         String upwd = request.getParameter("password");
-        String role = request.getParameter("role").trim().toUpperCase(); // Clean and standardize the role input
 
         HttpSession session = request.getSession();        
         RequestDispatcher dispatcher = null;
@@ -32,20 +31,35 @@ public class LoginServlet extends HttpServlet {
         try {
             Users loginUser = usersDao.login(uname);//take a special name show its login function!
             if(loginUser != null && checkPassword(upwd, loginUser.getPasswordHash())){
+                String roleStr = loginUser.getRole().name(); // retrieve Enum type name
+                System.out.println("Role from loginUser: " + roleStr);
+            	
                 session.setAttribute("name", loginUser.getUsername());
-                session.setAttribute("role", loginUser.getRole()); // Store Role enum directly and will used at listAllProductByRole later!! 
-                // get a NULL role because the users(loginUser) has no role attribute who was returned by usersDao.login(uname);!!
-                
-                if ("ADMIN".equals(role)){// this role is retrieved from above String variable role which get from input on jsp page! 
+                session.setAttribute("role", roleStr); // Store Role enum directly which is INCORRECT action!!
+ 
+
+                if ("ADMIN".equals(roleStr)){// remove getParameter("role")
+                    System.out.println("Attempting to dispatch to admin.jsp");
                     dispatcher = request.getRequestDispatcher("admin.jsp");
-                } else if ("USER".equals(role)) {
+                } else if ("USER".equals(roleStr)) {
+                	System.out.println("Attempting to dispatch to index.jsp");
                     dispatcher = request.getRequestDispatcher("index.jsp");
                 }
+                
+                // Check if dispatcher is null before forwarding
+                if (dispatcher != null) {
+                    dispatcher.forward(request, response);
+                } else {
+                    System.out.println("Error: No dispatcher found. Check if JSP files are correctly named and located.");
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Page not found");
+                }
+                
             } else {
                 request.setAttribute("loginStatus", "failed");
                 dispatcher = request.getRequestDispatcher("login.jsp");
+                dispatcher.forward(request, response);
             }
-            dispatcher.forward(request, response);
+           
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, 

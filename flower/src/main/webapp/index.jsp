@@ -1,7 +1,9 @@
 <%
 	if(session.getAttribute("name")==null){
 		response.sendRedirect("login.jsp");
-	}
+	} else if (request.getAttribute("products") == null) {
+        response.sendRedirect("home");
+    }
 %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

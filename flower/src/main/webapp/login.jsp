@@ -37,13 +37,13 @@
                             	<img src="images/flower1.jpg" alt="flower image" class="flower-image">                                                               
                             </div>
                             
-                            <div class="form-group">
+<!--                             <div class="form-group">
     							<label for="role">Choose Your Role:</label>
     							<select name="role" id="role">
         							<option value="user">User</option>
         							<option value="admin">Admin</option>
     							</select>
-							</div>
+							</div> -->
                             
 <!--                            	<div class="form-group notification-group">
         						<input type="checkbox" name="notification" id="notification">
