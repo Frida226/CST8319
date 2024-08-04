@@ -21,7 +21,7 @@ public class WishlistServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         // Initialize ProductDao using dependency injection or factory method
-        ProductsDao productsDao = new ProductsDaoImpl();
+         productDao = new ProductsDaoImpl();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

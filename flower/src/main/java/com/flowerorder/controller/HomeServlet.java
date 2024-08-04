@@ -31,11 +31,15 @@ public class HomeServlet extends HttpServlet {
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-//        Integer userId = (Integer) session.getAttribute("userId");
-        String userRole = (String) session.getAttribute("userRole");
-    	// Fetch the latest products from the database
-    	List<Products> products = productsDao.listAllFoodItemsByUser(userRole);
+        HttpSession session = request.getSession(false); // use false to avoid create new session
+        if (session == null || session.getAttribute("role") == null) {
+        	System.out.println("Redirecting to login page: No session or role found.");
+            response.sendRedirect("login.jsp"); // if not meet demand, redirect to login page
+        }
+
+        String userRole = (String) session.getAttribute("role");
+        System.out.println("User Role from Session: " + userRole);// verify the Role get from the previous session!
+    	List<Products> products = productsDao.listAllProductItemsByUser(userRole);
     	// Set the products as a request attribute to be accessible in the JSP
         request.setAttribute("products", products);
         // Forward the request to the "index.jsp" page which will display the products

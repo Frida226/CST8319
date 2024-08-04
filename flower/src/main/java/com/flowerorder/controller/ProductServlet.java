@@ -50,7 +50,7 @@ import javax.servlet.http.HttpSession;
 
         String userRole = session.getAttribute("role").toString().trim().toUpperCase();
         //Calls the listFoodItems method of foodItemService to retrieve a list of all food items
-    	List<Products> listProducts = productsDao.listAllFoodItemsByUser(userRole); 	    	
+    	List<Products> listProducts = productsDao.listAllProductItemsByUser(userRole); 	    	
     	//Attaches the list of food items to the request object. 
         request.setAttribute("products",listProducts);
         //Uses the request dispatcher to forward the request and response objects to the JSP page     

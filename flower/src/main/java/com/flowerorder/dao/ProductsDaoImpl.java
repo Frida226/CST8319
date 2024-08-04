@@ -10,7 +10,7 @@ import com.flowerorder.util.DBConnection;
 public class ProductsDaoImpl implements ProductsDao {
 
 	@Override
-	public List<Products> listAllFoodItemsByUser(String userRole){
+	public List<Products> listAllProductItemsByUser(String userRole){
 		List<Products> products = new ArrayList<>();
 		String sql = buildQueryBasedOnUserType(userRole);
 		System.out.println("Executing SQL: " + sql); //add logging!
