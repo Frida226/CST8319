@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
                 System.out.println("Role from loginUser: " + roleStr);
             	
                 session.setAttribute("name", loginUser.getUsername());
-//                session.setAttribute("role", loginUser.getRole()); // Store Role enum directly which is INCORRECT action!!
+                session.setAttribute("role", roleStr); // Store Role enum directly which is INCORRECT action!!
  
 
                 if ("ADMIN".equals(roleStr)){// remove getParameter("role")
