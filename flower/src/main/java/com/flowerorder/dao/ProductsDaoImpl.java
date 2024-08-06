@@ -4,11 +4,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.flowerorder.model.Cart;
 import com.flowerorder.model.Products;
 import com.flowerorder.util.DBConnection;
 
 public class ProductsDaoImpl implements ProductsDao {
 
+		
 	@Override
 	public List<Products> listAllProductItemsByUser(String userRole){
 		List<Products> products = new ArrayList<>();
@@ -133,5 +135,49 @@ public class ProductsDaoImpl implements ProductsDao {
             e.printStackTrace();
         }
     }
+    
+    @Override
+    public void addToCart(Cart cart) {
+    	String sql = "INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, cart.getUser_id());
+            pstmt.setInt(2, cart.getProduct_id());
+            pstmt.setInt(3, cart.getQuantity());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+	
+	@Override
+	public List<Products> listAllProductItemsforCart(String username){
+		List<Products> products = new ArrayList<>();
+		
+        String sql = "SELECT products.*,Sum(cart.quantity) as  quantity FROM products INNER JOIN cart on products.product_id = cart.product_id INNER JOIN users on users.user_id = cart.user_id WHERE users.username like ? "
+        		+ "Group by products.product_id,products.name,products.price,products.category,products.image_url,products.stock,products.created_at";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+               pst.setString(1, username);
+         	   ResultSet rs = pst.executeQuery();
+	           while (rs.next()) {
+		            Products product = new Products();
+		            product.setProduct_id(rs.getInt("product_id"));
+		            product.setName(rs.getString("name"));
+		            product.setDescription(rs.getString("description"));
+		            product.setPrice(rs.getDouble("price"));
+		            product.setCategory(rs.getString("category"));
+		            product.setImage_url(rs.getString("image_url"));
+		            product.setStock(rs.getInt("quantity"));
+		            product.setCreated_at(rs.getTimestamp("created_at"));
+		            products.add(product);// Adding each product to the list
+	           }
+	       } catch (SQLException e) {
+	           e.printStackTrace();
+	       }
+	       return products;
+	};
 
 }

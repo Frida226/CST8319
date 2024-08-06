@@ -39,18 +39,19 @@
             if (products != null && !products.isEmpty()) {
                 for (Products product : products) {
         %>
-		<form action="wishlist" method="POST" class="box">
+		<form action="CartServlet" method="POST" class="box">
             <a href="view_page.jsp?pid=<%= product.getProduct_id() %>" class="fas fa-eye"></a>
             <div class="price">$<%= product.getPrice() %>/-</div>
             <img src="uploaded_img/<%= product.getImage_url() %>" alt="" class="image">
             <div class="name"><%= product.getName() %></div>
             <input type="number" name="product_quantity" value="1" min="0" class="qty">
-            <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
+            <input type="hidden" id="product_id" name="product_id" value="<%= product.getProduct_id() %>">
             <input type="hidden" name="product_name" value="<%= product.getName() %>">
             <input type="hidden" name="product_price" value="<%= product.getPrice() %>">
             <input type="hidden" name="product_image" value="<%= product.getImage_url() %>">
             <input type="submit" value="Add to Wishlist" class="option-btn">
-            <input type="submit" value="Add to Cart" class="btn">
+            <input type="hidden" name="action" value="addToCart">
+            <input type="submit"  value="Add to Cart" class="btn">
         </form>
         <%
                 }
@@ -77,4 +78,7 @@
 <jsp:include page="footer.jsp" />
 
 </body>
+
 </html>
+
+  

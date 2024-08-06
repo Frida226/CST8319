@@ -6,6 +6,14 @@ public class Cart {
     private int product_id;
     private int quantity;
 
+    
+
+    public Cart(int user_id, int product_id, int quantity) {
+        this.user_id = user_id;
+        this.product_id = product_id;
+        this.quantity = quantity;
+    }
+    
     // Getters and setters
     public int getCart_id() {
         return cart_id;

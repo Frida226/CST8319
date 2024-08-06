@@ -77,6 +77,29 @@ public class UsersDaoImpl implements UsersDao {
         }
         return null;
     }
+
+    
+    @Override
+    public int getUserIdByUserName(String username) throws SQLException {
+        String query = "SELECT user_id FROM users WHERE username = ?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement stmt = con.prepareStatement(query)) {
+            
+            stmt.setString(1, username);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("user_id");
+                } else {
+                    return -1; 
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error getting user_id by username", e);
+            throw e;
+        }
+    }
+
+    
 }
 
 

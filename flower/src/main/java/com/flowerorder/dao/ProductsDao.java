@@ -1,6 +1,8 @@
 package com.flowerorder.dao;
 
 import java.util.List;
+
+import com.flowerorder.model.Cart;
 import com.flowerorder.model.Products;
 
 public interface ProductsDao {
@@ -10,6 +12,9 @@ public interface ProductsDao {
     void addToWishlist(int userId, int productId, String productName, double productPrice, String productImage);
 	List<Products> listAllProductItemsByUser( String userRole);
 	Products getProductById(int productId);
-
+	
+	void addToCart(Cart cart);
+	
+	List<Products> listAllProductItemsforCart( String username);
 }
 
