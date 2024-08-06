@@ -1,6 +1,20 @@
 # CST 8319 - Flower Order System
 This repository hosts the code for the Flower Order System, designed as part of the coursework for CST 8319. The application is built using Java Servlets and JSP, with a MySQL database for backend storage.
 
+## Directory Overview
+This section provides an overview of each main directory in the repository, detailing their purpose and contents, to help you navigate the project effectively.
+
+flower - 
+The flower directory contains the core components of our Flower Order System project. It includes backend and database scripts integral to the application's functionality. This is the main part of our project.
+
+FrontEnd (Not part of the project) - 
+The FrontEnd directory contains various frontend assets and configurations that were added for experimental purposes and are not part of the official project. These files are for testing and development outside the main application scope.
+
+.vscode - 
+The .vscode directory includes configuration files for Visual Studio Code that are used to enhance the development environment but are not necessary for the project's functionality.
+
+README.md - 
+These documentation files provide detailed information about the project, including setup, installation, usage, and an overview of the project structure. README.md is the main file that you are currently reading, which includes comprehensive documentation of the project.
 ## Branching Model
 master - The main branch representing the stable, production-ready code. This branch should always be in a working condition. All feature branches should branch off from the master. After a feature is completed and tested, it should be merged back into the master branch.
 Feature Branches - Working branches that branch off from master. Each team member will create branches off the master, work on their feature, and merge the feature branch back to master. Before merging a feature branch into master, merge master into the feature branch first, test to exclude any merging/integration issues. If stable, merge the feature branch into the master branch.
