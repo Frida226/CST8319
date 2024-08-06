@@ -71,13 +71,9 @@ public class CartServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-                break;
-            
-        }
-	        
+                break;   
+        }       
 	}
-
-
 	private void addToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         
 		

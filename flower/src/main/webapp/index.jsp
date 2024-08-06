@@ -42,7 +42,7 @@
 		<form action="CartServlet" method="POST" class="box">
             <a href="view_page.jsp?pid=<%= product.getProduct_id() %>" class="fas fa-eye"></a>
             <div class="price">$<%= product.getPrice() %>/-</div>
-            <img src="uploaded_img/<%= product.getImage_url() %>" alt="" class="image">
+            <img src="<%= product.getImage_url() %>" alt="" class="image">
             <div class="name"><%= product.getName() %></div>
             <input type="number" name="product_quantity" value="1" min="0" class="qty">
             <input type="hidden" id="product_id" name="product_id" value="<%= product.getProduct_id() %>">
