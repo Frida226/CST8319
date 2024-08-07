@@ -59,25 +59,6 @@ CREATE TABLE wishlist (
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
--- Create the featured_products table
-CREATE TABLE featured_products (
-    featured_product_id INT PRIMARY KEY AUTO_INCREMENT,
-    product_id INT,
-    start_date DATE,
-    end_date DATE,
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
-
--- Create the special_offers table
-CREATE TABLE special_offers (
-    special_offer_id INT PRIMARY KEY AUTO_INCREMENT,
-    product_id INT,
-    discount_percentage DECIMAL(5,2),
-    start_date DATE,
-    end_date DATE,
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
-
 -- Create the cart table
 CREATE TABLE cart (
     cart_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -86,16 +67,4 @@ CREATE TABLE cart (
     quantity INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
-
--- Create the reviews table
-CREATE TABLE reviews (
-    review_id INT PRIMARY KEY AUTO_INCREMENT,
-    product_id INT,
-    user_id INT,
-    rating INT,
-    comment TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (product_id) REFERENCES products(product_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
