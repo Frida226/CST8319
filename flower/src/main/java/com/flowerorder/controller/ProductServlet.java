@@ -31,15 +31,18 @@ import javax.servlet.http.HttpSession;
 				listProduct(request, response);
 			} else if ("edit".equals(action)) {
                 showEditForm(request, response);
-            } else {
+            } else if ("purchase".equals(action)) {
+                purchaseProduct(request, response);
+            }else {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
 		} catch (Exception ex) {
 			throw new ServletException(ex);
 		}
 	}
-    
-    private void listProduct(HttpServletRequest request, HttpServletResponse response) 
+   
+
+	private void listProduct(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
 
         HttpSession session = request.getSession(false); //session == null || 
@@ -73,6 +76,30 @@ import javax.servlet.http.HttpSession;
         request.setAttribute("product", existingProduct);
         dispatcher.forward(request, response);
     }
+    
+    private void purchaseProduct(HttpServletRequest request, HttpServletResponse response)
+    		throws ServletException, IOException {
+        int productId = Integer.parseInt(request.getParameter("product_id"));
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        Products product = productsDao.getProductById(productId);
+        if (product != null && product.getStock() >= quantity) {
+            // Here can realize the the logic of stock decrease or add to user's cart
+            // update stock
+            product.setStock(product.getStock() - quantity);
+            productsDao.updateProduct(product);
+            
+            request.setAttribute("product", product);
+            request.setAttribute("quantity", quantity);
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/cart.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            request.setAttribute("errorMessage", "Not enough stock available for " 
+            		+ (product != null ? product.getName() : "the selected product"));
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/cart.jsp");
+            dispatcher.forward(request, response);
+        }
+	}
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
