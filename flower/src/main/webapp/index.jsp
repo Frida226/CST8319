@@ -25,9 +25,9 @@
 
 <section class="home">
     <div class="content">
-        <h3>Seasonal Specials</h3>
-        <p>Experience the Artistry of Floral Design with Our Handpicked Bouquets and Seasonal Specials.</p>
-        <a href="special.jsp" class="btn">Discover More</a>
+        <h3>Floral Care Tips</h3>
+        <p>Learn how to keep your blooms fresh longer with our expert tips and tricks.</p>
+        <a href="guides.jsp" class="btn">Discover More</a>
     </div>
 </section>
 <section class="products">
