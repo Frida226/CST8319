@@ -58,7 +58,51 @@ public class UsersDaoImpl implements UsersDao {
     }
     @Override
     public Users login(String username) throws SQLException {
-        String query = "SELECT username, password_hash, role FROM users WHERE username = ?";
+        String query = "SELECT user_id,username, password_hash, role FROM users WHERE username = ?";//add user_id attribute in the loginUser object
+        try (Connection con = DBConnection.getConnection(); 
+             PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setString(1, username);
+            
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return new Users(
+                	rs.getInt("user_id"),  // Add this line to retrieve user_id
+                    rs.getString("username"), 
+                    rs.getString("password_hash"),
+                    Role.fromString(rs.getString("role"))// Convert string to Role enum here！！
+                );
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error during login", e);
+            throw e;
+        }
+        return null;
+    }
+    
+    // added methods for handling cart&.. function
+    @Override
+    public int getUserIdFromUserName(String username) {
+        String query = "SELECT user_id FROM users WHERE username = ?";
+        int user_id = -1;
+        try (Connection con = DBConnection.getConnection(); 
+             PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+            	user_id= rs.getInt("user_id");
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error during login", e);
+        }
+        return user_id;
+
+    
+    }
+    
+    @Override
+    public Users getUserProfile(String username) throws SQLException{
+    	
+        String query = "SELECT username, password_hash, email, phone_number, first_name, last_name, address FROM users WHERE username = ?";
         try (Connection con = DBConnection.getConnection(); 
              PreparedStatement pst = con.prepareStatement(query)) {
             pst.setString(1, username);
@@ -67,8 +111,12 @@ public class UsersDaoImpl implements UsersDao {
             if (rs.next()) {
                 return new Users(
                     rs.getString("username"), 
-                    rs.getString("password_hash"),
-                    Role.fromString(rs.getString("role"))// Convert string to Role enum here！！
+                    rs.getString("password_hash"), 
+                    rs.getString("email"),
+                    rs.getString("phone_number"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getString("address")
                 );
             }
         } catch (SQLException e) {
