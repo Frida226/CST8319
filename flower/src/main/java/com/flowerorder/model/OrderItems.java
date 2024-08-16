@@ -6,6 +6,7 @@ public class OrderItems {
     private int product_id;
     private int quantity;
     private double price;
+    private String product_name; // added attribute
 
     // Getters and setters
     public int getOrder_item_id() {
@@ -46,5 +47,13 @@ public class OrderItems {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+    
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
     }
 }

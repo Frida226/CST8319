@@ -1,15 +1,17 @@
 package com.flowerorder.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Orders {
     private int order_id;
     private int user_id;
     private double total_price;
-    private OrderStatus order_status;
+    private String order_status;  // Make it simple just with String not Enum!
     private String shipping_address;
     private String payment_method;
     private Timestamp created_at;
+    private List<OrderItems> orderItems;
 
     // Getters and setters
     public int getOrder_id() {
@@ -36,11 +38,11 @@ public class Orders {
         this.total_price = total_price;
     }
 
-    public OrderStatus getOrder_status() {
+    public String getOrder_status() {
         return order_status;
     }
 
-    public void setOrder_status(OrderStatus order_status) {
+    public void setOrder_status(String order_status) {
         this.order_status = order_status;
     }
 
@@ -66,6 +68,14 @@ public class Orders {
 
     public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
+    }
+    
+    public List<OrderItems> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItems> orderItems) {
+        this.orderItems = orderItems;
     }
 }
 
