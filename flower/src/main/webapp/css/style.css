@@ -329,7 +329,18 @@ footer nav a:hover {
 
 .box .qty {
     width: 60px; 
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
+}
+
+/* Increases the priority of the style selector to override the default input style */
+input.qty {
+    width: 60px !important; /*Override the default width: 100%*/
+    margin-bottom: 15px;
+    z-index: 10 !important; /* use enforced z-index */
+    position: relative; /* ensure z-index take effect */
+    border: 1px solid #ccc; /* redefine boarder if necessary */
+    box-sizing: content-box; /* override box-sizing: border-box */
+    padding: 6px; /* modify padding to avoid padding be overrided */
 }
 
 .box .option-btn,
