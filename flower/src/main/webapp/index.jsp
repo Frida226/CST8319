@@ -49,8 +49,12 @@
             <input type="hidden" name="product_name" value="<%= product.getName() %>">
             <input type="hidden" name="product_price" value="<%= product.getPrice() %>">
             <input type="hidden" name="product_image" value="<%= product.getImage_url() %>">
-            <input type="submit" value="Add to Wishlist" class="option-btn">
-            <input type="submit" value="Add to Cart" class="btn">
+            
+<!--             <input type="submit" value="Add to Wishlist" class="option-btn">
+            <input type="submit" value="Add to Cart" class="btn"> -->
+            
+            <input type="submit" value="Add to Wishlist" class="option-btn addToWishlist">
+            <input type="submit" value="Add to Cart" class="btn addToCart">
         </form>
         <%
                 }
@@ -75,6 +79,17 @@
 </section>
 
 <jsp:include page="footer.jsp" />
+
+<!--added script to trigger add addToWishlist & addToCart actions  -->
+<script>
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('addToWishlist')) {
+            event.target.closest('form').action = 'wishlist';
+        } else if (event.target.classList.contains('addToCart')) {
+            event.target.closest('form').action = 'Cart';
+        }
+    });
+</script>
 
 </body>
 </html>

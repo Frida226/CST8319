@@ -197,6 +197,7 @@
             return false;
         }
 
+        alert("Account Created Successfully!");
         return true; // Allow form submission if all checks pass
     }
 </script>

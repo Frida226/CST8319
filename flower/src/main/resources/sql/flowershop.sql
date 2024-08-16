@@ -50,6 +50,9 @@ CREATE TABLE order_items (
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
+-- change order-status to String for simple handle!!!!!
+ALTER TABLE Orders MODIFY order_status VARCHAR(20);
+
 -- Create the wishlist table
 CREATE TABLE wishlist (
     wishlist_id INT PRIMARY KEY AUTO_INCREMENT,
