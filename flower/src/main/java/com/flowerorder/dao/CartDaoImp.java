@@ -27,31 +27,31 @@ public class CartDaoImp implements CartDao{
 	}
 	
 	
-	@Override		//useless?
-	public List<Products> getAllCartItems(String username){
-		List<Products> products = new ArrayList<>();
-		String sql = "SELECT PRODUCTs.*,Sum(Cart.Quantity) as stock FROM products INNER JOIN CART ON Cart.product_id = products.product_id inner join users on users.user_id = cart.user_id where users.username like ? " + "  GROUP BY product_id,name,description,price,category,image_url";
-		System.out.println("Executing SQL: " + sql); //add logging!
-	    try (Connection con = DBConnection.getConnection();  
-	            PreparedStatement pst = con.prepareStatement(sql)) {
-	    		pst.setString(1, username);
-	           ResultSet rs = pst.executeQuery();
-	           while (rs.next()) {
-		            Products product = new Products();
-		            product.setProduct_id(rs.getInt("product_id"));
-		            product.setName(rs.getString("name"));
-		            product.setDescription(rs.getString("description"));
-		            product.setPrice(rs.getDouble("price"));
-		            product.setCategory(rs.getString("category"));
-		            product.setImage_url(rs.getString("image_url"));
-		            product.setStock(rs.getInt("stock"));
-		            products.add(product);// Adding each product to the list
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			return products;
-		}
+//	@Override		//useless?
+//	public List<Products> getAllCartItems(String username){
+//		List<Products> products = new ArrayList<>();
+//		String sql = "SELECT PRODUCTs.*,Sum(Cart.Quantity) as stock FROM products INNER JOIN CART ON Cart.product_id = products.product_id inner join users on users.user_id = cart.user_id where users.username like ? " + "  GROUP BY product_id,name,description,price,category,image_url";
+//		System.out.println("Executing SQL: " + sql); //add logging!
+//	    try (Connection con = DBConnection.getConnection();  
+//	            PreparedStatement pst = con.prepareStatement(sql)) {
+//	    		pst.setString(1, username);
+//	           ResultSet rs = pst.executeQuery();
+//	           while (rs.next()) {
+//		            Products product = new Products();
+//		            product.setProduct_id(rs.getInt("product_id"));
+//		            product.setName(rs.getString("name"));
+//		            product.setDescription(rs.getString("description"));
+//		            product.setPrice(rs.getDouble("price"));
+//		            product.setCategory(rs.getString("category"));
+//		            product.setImage_url(rs.getString("image_url"));
+//		            product.setStock(rs.getInt("stock"));
+//		            products.add(product);// Adding each product to the list
+//				}
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//			return products;
+//		}
 
 
 	@Override	// useless??
@@ -73,7 +73,7 @@ public class CartDaoImp implements CartDao{
 				item.setQuantity(rs.getInt("quantity"));
 				item.setPrice(rs.getDouble("price"));
 				//debugging
-				System.out.println("Product ID: " + item.getProduct_id() + ", Price: " + item.getPrice());
+//				System.out.println("Product ID: " + item.getProduct_id() + ", Price: " + item.getPrice());
 
 				cartItems.add(item);
 			}
@@ -119,15 +119,14 @@ public class CartDaoImp implements CartDao{
 
             stmt.setInt(1, userId);
             stmt.setInt(2, productId);
-//            stmt.executeUpdate();
+            stmt.executeUpdate();
             
-            int affectedRows = stmt.executeUpdate(); // 获取受影响的行数
-            
-            if (affectedRows > 0) {
-                System.out.println("Successfully removed product with id " + productId + " from cart for user " + userId);
-            } else {
-                System.out.println("No product with id " + productId + " found in cart for user " + userId);
-            }
+//            int affectedRows = stmt.executeUpdate(); // get rows affected          
+//            if (affectedRows > 0) {
+//                System.out.println("Successfully removed product with id " + productId + " from cart for user " + userId);
+//            } else {
+//                System.out.println("No product with id " + productId + " found in cart for user " + userId);
+//            }
         } 
         catch (SQLException e) {
             e.printStackTrace();
@@ -154,7 +153,7 @@ public class CartDaoImp implements CartDao{
 
 
 	@Override
-	public void updateCartItem(int user_id, int product_id, int quantity) {
+	public void addItemQty(int user_id, int product_id, int quantity) {
 	    String sql = "UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?";
 	    try (Connection conn = DBConnection.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -168,7 +167,20 @@ public class CartDaoImp implements CartDao{
 		
 	}
 
+	@Override
+	public void updateCartItem(Integer userId, int productId, int newQuantity) throws SQLException {
+	    String sql = "UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?";
 
+	    try (Connection conn = DBConnection.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+	        pstmt.setInt(1, newQuantity);
+	        pstmt.setInt(2, userId);
+	        pstmt.setInt(3, productId);
+
+	        pstmt.executeUpdate();
+	    }
+	}
 
 
 }

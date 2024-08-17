@@ -78,7 +78,7 @@ public class OrderDaoImpl implements OrderDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("Number of orders retrieved for user " + userId + ": " + orders.size()); //Debugging
+//        System.out.println("Number of orders retrieved for user " + userId + ": " + orders.size()); //Debugging
         return orders;
     }
 

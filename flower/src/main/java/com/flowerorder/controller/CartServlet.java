@@ -22,9 +22,6 @@ import com.flowerorder.model.Cart;
 import com.flowerorder.model.CartItem;
 import com.flowerorder.model.Products;
 
-/**
- * Servlet implementation class CartServlet
- */
 @WebServlet("/Cart")
 public class CartServlet extends HttpServlet {
     ProductsDao productsDao = new ProductsDaoImpl();
@@ -66,9 +63,9 @@ public class CartServlet extends HttpServlet {
         case "addToCart":
             addToCart(request, response);
             break;
-//        case "updateCart":
-//            updateCart(request, response);
-//            break;
+        case "updateCart":
+            updateCartItem(request, response);
+            break;
         case "removeFromCart":
             removeFromCart(request, response);
             break;
@@ -101,7 +98,7 @@ public class CartServlet extends HttpServlet {
             boolean itemExists = cartDao.checkIfItemExists(user_id, product_id);
             if (itemExists) {
                 // if product exist, update its qty
-                cartDao.updateCartItem(user_id, product_id, quantity);
+                cartDao.addItemQty(user_id, product_id, quantity);
             } else {
                 // if not exist,add the product
                 cartDao.addToCart(user_id, product_id, quantity);
@@ -115,50 +112,48 @@ public class CartServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/Cart");
     }
 
-
-	/*
-	 * private void updateCart(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { // Your updateCart logic
-	 * here }
-	 */
     
     private void removeFromCart(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("user_id");
-//        int userId = (int) session.getAttribute("user_id");
         int productId = Integer.parseInt(request.getParameter("product_id")); // from request to get product_id
-//        Integer productId = (Integer) session.getAttribute("product_id");
       
         try {
-        	System.out.println("Attempting to remove product_id: " + productId + " for user_id: " + userId);
+//        	System.out.println("Attempting to remove product_id: " + productId + " for user_id: " + userId);
         // Remove item from database
         cartDao.removeFromCart(userId, productId); 
         
-        // Retrieve the cart from session
-//        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+        // Reload the cart from the database after deletion
         List<CartItem> cartItems = cartDao.getCartItemsByUserId(userId);
         
-        // Remove item from the session list
-        if (cartItems != null) {
-        	System.out.println("Cart items before removal: " + cartItems.size());
-        	boolean removed = cartItems.removeIf(item -> item.getProduct_id()== productId); // use `==` to compare int type
-            for (CartItem item : cartItems) {
-                System.out.println("Product ID in session: " + item.getProduct_id());
-            }
-            if (removed) {
-                System.out.println("Item with product_id " + productId + " removed from session cartItems.");
-            } else {
-                System.out.println("Item with product_id " + productId + " not found in session cartItems.");
-            }        	
-        	
-            session.setAttribute("cartItems", cartItems); // Update the session
-        }
+        session.setAttribute("cartItems", cartItems); // Update the session
         
         response.sendRedirect("cart.jsp");
 
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to remove item from cart.");
+        }
+    }
+    
+    private void updateCartItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("user_id");
+        int productId = Integer.parseInt(request.getParameter("product_id"));
+        int newQuantity = Integer.parseInt(request.getParameter("quantity"));
+
+        try {
+            // 更新数据库中的数量
+            cartDao.updateCartItem(userId, productId, newQuantity);
+
+            // 重新从数据库加载更新后的购物车
+            List<CartItem> cartItems = cartDao.getCartItemsByUserId(userId);
+            session.setAttribute("cartItems", cartItems);
+
+            response.sendRedirect("cart.jsp");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update cart item.");
         }
     }
 }

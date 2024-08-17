@@ -112,7 +112,7 @@ public class OrderServlet extends HttpServlet {
     private void createOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("user_id"); //Integer is a wrapper class for the primitive data type int
-        System.out.println("User ID from session in doPost-createOrder: " + userId);
+//        System.out.println("User ID from session in doPost-createOrder: " + userId);
         
         if (userId == null) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "User not logged in or session expired.");
@@ -146,8 +146,8 @@ public class OrderServlet extends HttpServlet {
             orderItem.setProduct_name(productName); // Set the product name in the order item
 
             orderItems.add(orderItem);
-            //debugging
-//            System.out.println("Product ID: " + cartItem.getProduct_id() + ", "+ "Quantity: " + cartItem.getQuantity() + ", Price: " + cartItem.getPrice());
+//            System.out.println("Product ID: " + cartItem.getProduct_id() + ", "+ "Quantity: " 
+//            		+ cartItem.getQuantity() + ", Price: " + cartItem.getPrice());    //debugging
            
             totalPrice += cartItem.getPrice() * cartItem.getQuantity();
         }
@@ -166,7 +166,7 @@ public class OrderServlet extends HttpServlet {
         order.setTotal_price(totalPrice);  // Add this line to set the total price
         order.setOrder_status("PENDING"); // default status when creating order
         
-        System.out.println("Order Status before saving: " + order.getOrder_status());//Debugging
+//        System.out.println("Order Status before saving: " + order.getOrder_status());//Debugging
 
         try {
             orderDao.createOrder(order);
