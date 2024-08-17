@@ -49,6 +49,7 @@
 
             <!-- Form for Add to Wishlist -->
             <form action="wishlist" method="POST" class="action-form">
+                <input type="hidden" name="action" value="addToWishlist"> <!-- froget to add initially -->
                 <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
                 <input type="hidden" name="product_name" value="<%= product.getName() %>">
                 <input type="hidden" name="product_price" value="<%= product.getPrice() %>">

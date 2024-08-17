@@ -19,7 +19,7 @@
         <a href="login.jsp" class="icon-link">
         	<i class="fas fa-user"></i>
         </a>
-        <a href="wishlist.jsp" class="icon-link">
+        <a href="wishlist" class="icon-link">
             <i class="fas fa-heart"></i> 
         </a>
         <a href="cart.jsp" class="icon-link">

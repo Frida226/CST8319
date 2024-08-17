@@ -66,6 +66,12 @@ public class OrderServlet extends HttpServlet {
 //            System.out.println("Order ID: " + order.getOrder_id());
 //        }
         
+//        for (Orders order : orders) {
+//            if (order.getUser_id() != userId) {
+//                System.out.println("Error: Order " + order.getOrder_id() + " does not belong to user " + userId);
+//            }
+//        }
+        
      // Reload the order list after deletion
         orders = orderDao.getOrdersByUserId(userId);
         request.setAttribute("orders", orders);
