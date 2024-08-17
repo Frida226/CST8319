@@ -28,16 +28,11 @@ public class WishlistServlet extends HttpServlet {
     
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
         Integer userId = (Integer) request.getSession().getAttribute("user_id");
         List<WishlistItem> wishlistItems = wishlistDao.getWishlistItemsByUserId(userId);
-        System.out.println("User ID in session: " + userId);//debugging
-        System.out.println("Number of wishlist items retrieved for user " + userId + ": " + wishlistItems.size());//debugging
         request.setAttribute("wishlistItems", wishlistItems);
         RequestDispatcher dispatcher = request.getRequestDispatcher("wishlist.jsp");
         dispatcher.forward(request, response);
-
     }
 
     

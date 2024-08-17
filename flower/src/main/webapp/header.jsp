@@ -22,7 +22,7 @@
         <a href="wishlist" class="icon-link">
             <i class="fas fa-heart"></i> 
         </a>
-        <a href="cart.jsp" class="icon-link">
+        <a href="Cart" class="icon-link">
             <i class="fas fa-shopping-cart"></i> 
         </a>
     </nav>
