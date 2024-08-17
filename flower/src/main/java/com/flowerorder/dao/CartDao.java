@@ -12,4 +12,8 @@ public interface CartDao {
 	  void addToCart(int user_id, int product_Id, int quantity);
 	  List<Products> getAllCartItems( String username);
 	  List<CartItem> getCartByUserId(Integer userId);
+	  void removeFromCart(int userId, int productId) throws SQLException;
+	boolean checkIfItemExists(int user_id, int product_id);
+	void updateCartItem(int user_id, int product_id, int quantity);
+	List<CartItem> getCartItemsByUserId(Integer userId);
 }

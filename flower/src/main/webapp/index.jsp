@@ -60,6 +60,7 @@
 
             <!-- Form for Add to Cart -->
             <form action="Cart" method="POST" class="action-form">
+                <input type="hidden" name="action" value="addToCart">  <!-- add action parameter -->
                 <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
                 <input type="hidden" name="product_name" value="<%= product.getName() %>">
                 <input type="hidden" name="product_price" value="<%= product.getPrice() %>">

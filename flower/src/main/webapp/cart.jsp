@@ -119,12 +119,20 @@
     <h1 style="text-align: left;">Your Cart</h1>
     <div class="product-container">
         <c:forEach var="item" items="${cartItems}">
-            <div class="box">
-                <img src="${item.image_url}" alt="${item.name}" class="product-image">
-                <div class="price">$${item.price}/-</div>
-                <div class="name">${item.name}</div>
-                <div class="quantity">${item.stock}</div>
-                <form action="removeFromCart" method="post">
+		    <div class="box">
+		        <img src="${item.product_image}" alt="${item.product_name}" class="product-image">
+		        <div class="name">${item.product_name}</div>
+		        <div class="price">$${item.price}</div>
+		        <div class="quantity">
+		            <form action="Cart" method="post">
+		                <input type="hidden" name="action" value="updateCart">
+		                <input type="hidden" name="product_id" value="${item.product_id}">
+		                <input type="number" name="quantity" value="${item.quantity}" min="1" class="qty">
+		                <input type="submit" value="Update Quantity" class="btn-update">
+		            </form>
+		        </div>
+                <form action="Cart" method="post">
+                    <input type="hidden" name="action" value="removeFromCart">
                     <input type="hidden" name="product_id" value="${item.product_id}">
                     <button type="submit" class="btn-remove">Remove</button>
                 </form>

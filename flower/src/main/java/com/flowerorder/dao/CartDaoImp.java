@@ -27,7 +27,7 @@ public class CartDaoImp implements CartDao{
 	}
 	
 	
-	@Override
+	@Override		//useless?
 	public List<Products> getAllCartItems(String username){
 		List<Products> products = new ArrayList<>();
 		String sql = "SELECT PRODUCTs.*,Sum(Cart.Quantity) as stock FROM products INNER JOIN CART ON Cart.product_id = products.product_id inner join users on users.user_id = cart.user_id where users.username like ? " + "  GROUP BY product_id,name,description,price,category,image_url";
@@ -53,12 +53,10 @@ public class CartDaoImp implements CartDao{
 			return products;
 		}
 
-		// need create
-	@Override
+
+	@Override	// useless??
 	public List<CartItem> getCartByUserId(Integer userId) {
 		List<CartItem> cartItems = new ArrayList<>();
-//		String query = "SELECT * FROM cart WHERE user_id = ?";
-		// use complicated inner-joint SQL to retrieve price
 		String query = "SELECT c.product_id, c.quantity, p.price " +
 	               "FROM cart c " +
 	               "JOIN products p ON c.product_id = p.product_id " +
@@ -84,5 +82,93 @@ public class CartDaoImp implements CartDao{
 	    }
 		return cartItems;
     }
+	
+
+	public List<CartItem> getCartItemsByUserId(Integer userId) {
+	    String sql = "SELECT c.product_id, c.quantity, p.price AS price, p.name AS product_name, p.image_url AS product_image " +
+	                 "FROM cart c " + //lack of a space!!
+	                 "INNER JOIN products p ON c.product_id = p.product_id " +
+	                 "WHERE c.user_id = ?";
+	    List<CartItem> cartItems = new ArrayList<>();
+	    try (Connection conn = DBConnection.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	        pstmt.setInt(1, userId);
+	        ResultSet rs = pstmt.executeQuery();
+	        while (rs.next()) {
+	            CartItem item = new CartItem();
+	            item.setProduct_id(rs.getInt("product_id"));
+	            item.setQuantity(rs.getInt("quantity"));
+	            item.setPrice(rs.getDouble("price"));
+	            item.setProduct_name(rs.getString("product_name")); 
+	            item.setProduct_image(rs.getString("product_image"));
+	            cartItems.add(item);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return cartItems;
+	}
+	
+	
+    @Override
+    public void removeFromCart(int userId, int productId) throws SQLException{
+        String sql = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            stmt.setInt(2, productId);
+//            stmt.executeUpdate();
+            
+            int affectedRows = stmt.executeUpdate(); // 获取受影响的行数
+            
+            if (affectedRows > 0) {
+                System.out.println("Successfully removed product with id " + productId + " from cart for user " + userId);
+            } else {
+                System.out.println("No product with id " + productId + " found in cart for user " + userId);
+            }
+        } 
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+	@Override
+	public boolean checkIfItemExists(int user_id, int product_id) {
+	    String query = "SELECT COUNT(*) FROM cart WHERE user_id = ? AND product_id = ?";
+	    try (Connection conn = DBConnection.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(query)) {
+	        pstmt.setInt(1, user_id);
+	        pstmt.setInt(2, product_id);
+	        ResultSet rs = pstmt.executeQuery();
+	        if (rs.next()) {
+	            return rs.getInt(1) > 0;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
+
+
+	@Override
+	public void updateCartItem(int user_id, int product_id, int quantity) {
+	    String sql = "UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?";
+	    try (Connection conn = DBConnection.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	        pstmt.setInt(1, quantity);
+	        pstmt.setInt(2, user_id);
+	        pstmt.setInt(3, product_id);
+	        pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		
+	}
+
+
+
 
 }
