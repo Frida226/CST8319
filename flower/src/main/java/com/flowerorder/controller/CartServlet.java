@@ -1,6 +1,7 @@
 package com.flowerorder.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,7 @@ import com.flowerorder.dao.ProductsDaoImpl;
 import com.flowerorder.dao.UsersDao;
 import com.flowerorder.dao.UsersDaoImpl;
 import com.flowerorder.model.Cart;
+import com.flowerorder.model.CartItem;
 import com.flowerorder.model.Products;
 
 /**
@@ -31,49 +33,79 @@ public class CartServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
+
             HttpSession session = request.getSession(false);
+            Integer userId = (Integer) session.getAttribute("user_id");
+            
             if (session == null || session.getAttribute("name") == null) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "User not found.");
                 return;
             }
+            
+            if (userId == null) {
+                response.sendRedirect("login.jsp");
+                return;
+            }
 
-            List<Products> cartItems = cartDao.getAllCartItems(session.getAttribute("name").toString());
+            List<CartItem> cartItems = cartDao.getCartItemsByUserId(userId);            
             request.setAttribute("cartItems", cartItems);
+            
             RequestDispatcher dispatcher = request.getRequestDispatcher("/cart.jsp");
             dispatcher.forward(request, response);
-        } catch (Exception ex) {
-            throw new ServletException(ex);
-        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String addToCart = request.getParameter("addToCart");
+        String action = request.getParameter("action");
 
-        if (addToCart == null) {
-            addToCart = "addToCart";
+        if (action == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action parameter is missing.");
+            return;
         }
 
-        switch (addToCart) {
-            case "addToCart":
-                addToCart(request, response);
-                break;
-            case "updateCart":
-                updateCart(request, response);
-                break;
-            default:
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action.");
-                return;
+        switch (action) {
+        case "addToCart":
+            addToCart(request, response);
+            break;
+//        case "updateCart":
+//            updateCart(request, response);
+//            break;
+        case "removeFromCart":
+            removeFromCart(request, response);
+            break;
+        default:
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action.");
+            return;
         }
     }
 
+    
     private void addToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        
+        // retreive userName and check if exist
+        String username = (String) session.getAttribute("name");
+        if (username == null) {
+            response.sendRedirect("login.jsp"); // if not login then redirect to login page
+            return;
+        }
+        
+        // retreive product id and quantity
         int product_id = Integer.parseInt(request.getParameter("product_id"));
         int quantity = Integer.parseInt(request.getParameter("product_quantity"));
-        String username = request.getSession().getAttribute("name").toString();
-
+        
         try {
-            cartDao.addToCart(usersDao.getUserIdFromUserName(username), product_id, quantity);
+            // get userName from userId
+            int user_id = usersDao.getUserIdFromUserName(username);
+
+            // check if the product under the user exist in db
+            boolean itemExists = cartDao.checkIfItemExists(user_id, product_id);
+            if (itemExists) {
+                // if product exist, update its qty
+                cartDao.updateCartItem(user_id, product_id, quantity);
+            } else {
+                // if not exist,add the product
+                cartDao.addToCart(user_id, product_id, quantity);
+            }
             request.setAttribute("message", "Item was added to Cart successfully!");
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Error adding to Cart: " + e.toString());
@@ -83,7 +115,50 @@ public class CartServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/Cart");
     }
 
-    private void updateCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Your updateCart logic here
+
+	/*
+	 * private void updateCart(HttpServletRequest request, HttpServletResponse
+	 * response) throws ServletException, IOException { // Your updateCart logic
+	 * here }
+	 */
+    
+    private void removeFromCart(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("user_id");
+//        int userId = (int) session.getAttribute("user_id");
+        int productId = Integer.parseInt(request.getParameter("product_id")); // from request to get product_id
+//        Integer productId = (Integer) session.getAttribute("product_id");
+      
+        try {
+        	System.out.println("Attempting to remove product_id: " + productId + " for user_id: " + userId);
+        // Remove item from database
+        cartDao.removeFromCart(userId, productId); 
+        
+        // Retrieve the cart from session
+//        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+        List<CartItem> cartItems = cartDao.getCartItemsByUserId(userId);
+        
+        // Remove item from the session list
+        if (cartItems != null) {
+        	System.out.println("Cart items before removal: " + cartItems.size());
+        	boolean removed = cartItems.removeIf(item -> item.getProduct_id()== productId); // use `==` to compare int type
+            for (CartItem item : cartItems) {
+                System.out.println("Product ID in session: " + item.getProduct_id());
+            }
+            if (removed) {
+                System.out.println("Item with product_id " + productId + " removed from session cartItems.");
+            } else {
+                System.out.println("Item with product_id " + productId + " not found in session cartItems.");
+            }        	
+        	
+            session.setAttribute("cartItems", cartItems); // Update the session
+        }
+        
+        response.sendRedirect("cart.jsp");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to remove item from cart.");
+        }
     }
 }

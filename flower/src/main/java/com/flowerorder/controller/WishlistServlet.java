@@ -34,7 +34,7 @@ public class WishlistServlet extends HttpServlet {
         // Use ProductDao to handle wishlist addition
         productDao.addToWishlist(userId, productId, productName, productPrice, productImage);
 
-        response.sendRedirect("home");
+        response.sendRedirect("wishlist.jsp");
     }
 }
 
