@@ -93,7 +93,7 @@
     <nav>
         <ul>
             <li><a href="manageInventory.jsp">Manage Inventory</a></li>
-            <li><a href="processOrders.jsp">Process Orders</a></li>
+            <li><a href="admin?action=processOrders">Process Orders</a></li>
             <li><a href="viewReports.jsp">View Reports</a></li>
             <li><a href="handleReturns.jsp">Handle Returns</a></li>
    			<li><a href="addAdmin.jsp">Add New Admin</a></li>

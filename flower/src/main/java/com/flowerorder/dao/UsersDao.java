@@ -1,6 +1,8 @@
 package com.flowerorder.dao;
 
 import java.sql.SQLException;
+import java.util.List;
+
 import com.flowerorder.model.Users;
 
 public interface UsersDao {
@@ -11,4 +13,5 @@ public interface UsersDao {
 	// added method to get method implement in UserDaoImpl
 	int getUserIdFromUserName(String username);
     Users getUserProfile(String username) throws SQLException;
+	List<Users> getAllUsers();
 }

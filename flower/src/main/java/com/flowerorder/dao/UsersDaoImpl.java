@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -124,6 +126,30 @@ public class UsersDaoImpl implements UsersDao {
             throw e;
         }
         return null;
+    }
+    
+    @Override
+    public List<Users> getAllUsers() {
+        List<Users> usersList = new ArrayList<>();
+        String sql = "SELECT user_id, username, role FROM users WHERE role = 'USER'";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Users user = new Users(
+                    rs.getInt("user_id"), 
+                    rs.getString("username"), 
+                    Role.valueOf(rs.getString("role").toUpperCase())	// transfer to UPPERCASE
+                );
+                usersList.add(user);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return usersList;
     }
 }
 

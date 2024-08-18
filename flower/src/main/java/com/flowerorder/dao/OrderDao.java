@@ -12,5 +12,6 @@ public interface OrderDao {
     void deleteOrderById(int orderId);
 	Orders getOrdersByOrderId(int orderId);
 	List<OrderItems> getOrderItemsByOrderId(int orderId);
+	void updateOrder(int orderId, String orderStatus, String shippingAddress, String paymentMethod);
 }
 

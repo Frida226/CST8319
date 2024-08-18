@@ -173,5 +173,22 @@ public class OrderDaoImpl implements OrderDao {
             e.printStackTrace();
         }
     }
+    
+    @Override
+    public void updateOrder(int orderId, String orderStatus, String shippingAddress, String paymentMethod) {
+        String sql = "UPDATE orders SET order_status = ?, shipping_address = ?, payment_method = ? WHERE order_id = ?";
+        
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, orderStatus);
+            stmt.setString(2, shippingAddress);
+            stmt.setString(3, paymentMethod);
+            stmt.setInt(4, orderId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
