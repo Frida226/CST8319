@@ -16,17 +16,16 @@
         <a href="about.jsp">About</a>
         <a href="shop.jsp">Shop</a>
         <a href="contact.jsp">Contact</a>
-        <a href="Profile" class="icon-link">
+        <a href="login.jsp" class="icon-link">
         	<i class="fas fa-user"></i>
         </a>
         <a href="wishlist.jsp" class="icon-link">
             <i class="fas fa-heart"></i> 
         </a>
-        <a href="Cart" class="icon-link">
+        <a href="cart.jsp" class="icon-link">
             <i class="fas fa-shopping-cart"></i> 
         </a>
     </nav>
 </header>
 </body>
-</html> 
-
+</html>

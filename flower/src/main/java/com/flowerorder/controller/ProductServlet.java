@@ -31,7 +31,7 @@ import javax.servlet.http.HttpSession;
 				listProduct(request, response);
 			} else if ("edit".equals(action)) {
                 showEditForm(request, response);
-            } else { 
+            } else {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
 		} catch (Exception ex) {

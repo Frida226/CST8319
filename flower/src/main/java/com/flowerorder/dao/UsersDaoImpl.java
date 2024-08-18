@@ -77,54 +77,6 @@ public class UsersDaoImpl implements UsersDao {
         }
         return null;
     }
-    
-    
-    @Override
-    public int getUserIdFromUserName(String username) {
-        String query = "SELECT user_id FROM users WHERE username = ?";
-        int user_id = -1;
-        try (Connection con = DBConnection.getConnection(); 
-             PreparedStatement pst = con.prepareStatement(query)) {
-            pst.setString(1, username);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-            	user_id= rs.getInt("user_id");
-            }
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error during login", e);
-        }
-        return user_id;
-
-    
-    }
-    
-    @Override
-    public Users getUserProfile(String username) throws SQLException{
-    	
-        String query = "SELECT username, password_hash, email, phone_number, first_name, last_name, address FROM users WHERE username = ?";
-        try (Connection con = DBConnection.getConnection(); 
-             PreparedStatement pst = con.prepareStatement(query)) {
-            pst.setString(1, username);
-            
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                return new Users(
-                    rs.getString("username"), 
-                    rs.getString("password_hash"), 
-                    rs.getString("email"),
-                    rs.getString("phone_number"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("address")
-                );
-            }
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error during login", e);
-            throw e;
-        }
-        return null;
-
-    }
 }
 
 

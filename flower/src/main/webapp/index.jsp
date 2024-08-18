@@ -30,6 +30,7 @@
         <a href="guides.jsp" class="btn">Discover More</a>
     </div>
 </section>
+
 <section class="products">
     <h1 class="title">Latest Products</h1>
     <div class="box-container">
@@ -38,7 +39,7 @@
             if (products != null && !products.isEmpty()) {
                 for (Products product : products) {
         %>
-        <form method="POST" class="box productForm">
+		<form action="wishlist" method="POST" class="box">
             <a href="view_page.jsp?pid=<%= product.getProduct_id() %>" class="fas fa-eye"></a>
             <div class="price">$<%= product.getPrice() %>/-</div>
             <img src="uploaded_img/<%= product.getImage_url() %>" alt="" class="image">
@@ -48,8 +49,8 @@
             <input type="hidden" name="product_name" value="<%= product.getName() %>">
             <input type="hidden" name="product_price" value="<%= product.getPrice() %>">
             <input type="hidden" name="product_image" value="<%= product.getImage_url() %>">
-            <input type="submit" value="Add to Wishlist" class="option-btn addToWishlist">
-            <input type="submit" value="Add to Cart" class="btn addToCart">
+            <input type="submit" value="Add to Wishlist" class="option-btn">
+            <input type="submit" value="Add to Cart" class="btn">
         </form>
         <%
                 }
@@ -74,17 +75,6 @@
 </section>
 
 <jsp:include page="footer.jsp" />
-
-<script>
-    document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('addToWishlist')) {
-            event.target.closest('form').action = 'wishlist';
-        } else if (event.target.classList.contains('addToCart')) {
-            event.target.closest('form').action = 'Cart';
-        }
-    });
-</script>
-
 
 </body>
 </html>
