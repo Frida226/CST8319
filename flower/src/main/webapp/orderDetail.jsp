@@ -46,6 +46,9 @@
     .btn-secondary:hover {
         background-color: #5a6268;
     }
+    .bottom {
+    	margin-bottom:60px;
+    }
 </style>
 </head>
 <body>
@@ -94,7 +97,7 @@
         	<input type="hidden" name="order_id" value="${order_id}">
         	<input type="submit" class="btn btn-success" value="Send Email">
     	</form>
-        
+        <div class=bottom></div>
     </div>
 <jsp:include page="footer.jsp" />
 </body>

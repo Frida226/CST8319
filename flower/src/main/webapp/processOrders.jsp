@@ -124,7 +124,10 @@
     .return-btn:hover {
         background-color: #0056b3;
     }
-
+	.button-container {
+   			text-align: center;
+    		margin-bottom: 120px;
+   	}
 </style>
 
 </head>
@@ -199,8 +202,8 @@
 
 
 <jsp:include page="footer.jsp" />
-
-<a href="admin.jsp" class="return-btn">Return to Admin Dashboard</a>
-
+<div class="button-container">
+	<a href="admin.jsp" class="return-btn">Return to Admin Dashboard</a>
+</div>
 </body>
 </html>

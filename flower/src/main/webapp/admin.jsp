@@ -3,103 +3,126 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-     <link rel="stylesheet" href="css/style.css"> 
-
-        <style>
-        /* set style for 'admin.jsp' */
+    <link rel="stylesheet" href="styles.css">
+</head>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto&display=swap" rel="stylesheet">
+    <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Roboto', sans-serif;
+            background-color: #fef9f4;
+            color: #333;
             margin: 0;
             padding: 0;
         }
 
-        h1 {
-            text-align: center;
-            font-size: 36px;
-
-            background-color: #81C784;
+        .dashboard-header {
+            background-color: #6AB04C;
             color: white;
-            padding: 15px;
-            border-radius: 15px; 
-            margin-top: 0px;
-            margin-bottom: 0;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: 'Playfair Display', serif;
         }
 
-        nav {
-            background-color: #333;
-            overflow: hidden;
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 2.5rem;
         }
 
-        nav ul {
-            list-style-type: none;
+        .dashboard-nav {
+            background-color: #2d3436;
+            padding: 1rem;
+        }
+
+        .dashboard-nav ul {
+            list-style: none;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
         }
 
-        nav ul li {
-            margin: 0 15px;
+        .dashboard-nav li {
+            margin: 0;
         }
 
-        nav ul li a {
+        .dashboard-nav a {
             color: white;
             text-decoration: none;
-            padding: 14px 20px;
+            padding: 0.75rem 1.5rem;
             display: block;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-family: 'Roboto', sans-serif;
         }
 
-        nav ul li a:hover {
-            background-color: #575757;
+        .dashboard-nav a:hover {
+            background-color: #636e72;
         }
 
-        nav ul li a.active {
-            background-color: #4CAF50;
-        }
-        
-                /* Style for 'return' button */
-        .btn-return {
-/*             display: block;
-            margin: 40px auto 20px; */
-    		position: fixed; 
-    		bottom: 20px; /* 20px to bottom */
-    		left: 50%; /* horizone middle */
-    		transform: translateX(-50%); /* Modify to be middle */
- 			width: 100%; 
-            background-color: #007BFF; /* Blue BG */
-            color: white; 
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+        .dashboard-content {
+            padding: 2rem;
             text-align: center;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 2rem;
+            border-radius: 15px;
+            background-image: url('https://example.com/flower-background.png'); /* 用实际的花店背景图替换 */
+            background-size: cover;
+        }
+
+        .dashboard-content p {
+            font-size: 1.2rem;
+            color: #6AB04C;
+        }
+
+        .dashboard-footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #6AB04C;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .btn-return {
+            color: white;
+            background-color: #e17055;
+            padding: 0.75rem 1.5rem;
             text-decoration: none;
-            transition: background-color 0.3s ease;
-            width: auto; /* Set width to auto */
-            display: inline-block; /* Make buttons inline */ 
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
 
         .btn-return:hover {
-            background-color: #0056b3; /* Dark blue */
-        }	
-    </style> 
-</head>
+            background-color: #d35400;
+        }
+    </style>
 <body>
-    <h1>Admin Dashboard</h1>
-    <nav>
+    <header class="dashboard-header">
+        <h1>Admin Dashboard</h1>
+    </header>
+    
+    <nav class="dashboard-nav">
         <ul>
             <li><a href="manageInventory.jsp">Manage Inventory</a></li>
             <li><a href="admin?action=processOrders">Process Orders</a></li>
             <li><a href="viewReports.jsp">View Reports</a></li>
             <li><a href="handleReturns.jsp">Handle Returns</a></li>
-   			<li><a href="addAdmin.jsp">Add New Admin</a></li>
+            <li><a href="addAdmin.jsp">Add New Admin</a></li>
         </ul>
     </nav>
     
-	<a href="login.jsp" class="btn-return">Return to Login</a>
+    <div class="dashboard-content">
+        <p>Welcome to the Admin Dashboard. Please select an option from the menu to get started.</p>
+        <!-- You can add more content or dashboard widgets here -->
+    </div>
+    
+    <footer class="dashboard-footer">
+        <a href="login.jsp" class="btn-return">Return to Login</a>
+    </footer>
 </body>
 </html>

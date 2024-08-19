@@ -19,17 +19,16 @@
         width: 80%;
         padding: 20px;
         margin: 0 auto; /* Centers the section horizontally */
+        margin-bottom: 90px;
     }
 
     .product-container {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
-        justify-content: space-between; /* Distributes space between items */
     }
 
     .box {
-        width: calc(25% - 20px);
         box-sizing: border-box;
         border: 1px solid #ccc;
         padding: 10px;
@@ -37,12 +36,8 @@
     }
 
     .product-image {
-        width: 100%;
-        height: auto;
-    }
-
-    .price, .name, .quantity {
-        margin: 10px 0;
+        width: 200px;
+        height: 200px;       
     }
 
     .btn-remove {
@@ -59,8 +54,8 @@
 
     /* Styles for the form */
     form {
-        margin-top: 30px;
-        padding: 20px;
+        margin-top: 10px;
+        padding: 5px;
         background-color: #f9f9f9;
         border: 1px solid #ddd;
         border-radius: 8px;
@@ -84,7 +79,7 @@
     input[type="submit"] {
         background-color: #4CAF50; /* Soft green */
         color: white;
-        padding: 12px 20px;
+        padding: 8px 5px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
@@ -93,7 +88,10 @@
     input[type="submit"]:hover {
         background-color: #45a049;
     }
-
+    
+	.button-container {
+   		text-align: center;
+	}
     /* Styles for the Return to Home button */
     .btn {
         display: inline-block;
@@ -127,7 +125,7 @@
 		            <form action="Cart" method="post">
 		                <input type="hidden" name="action" value="updateCart">
 		                <input type="hidden" name="product_id" value="${item.product_id}">
-		                <input type="number" name="quantity" value="${item.quantity}" min="1" class="qty">
+		                <input type="number" name="quantity" value="${item.quantity}" min="1" class="qty" style="margin-left: 85px;">
 		                <input type="submit" value="Update Quantity" class="btn-update">
 		            </form>
 		        </div>
@@ -159,9 +157,9 @@
 	    <!-- Place Order Button -->
 	    <input type="submit" value="Place Order">
 	</form>
-    
-    <a href="index.jsp" class="btn">Return to Home</a>
-    
+    <div class="button-container">
+    	<a href="index.jsp" class="btn">Return to Home</a>
+	</div>
 
 </section>
 

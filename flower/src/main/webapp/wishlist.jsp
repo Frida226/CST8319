@@ -50,9 +50,9 @@
     }
 
     .product-image {
-        max-width: 100%;
-        height: auto;
-        margin-bottom: 10px;
+        width: 100%;
+    	height: 300px;
+   		object-fit: cover;
     }
 
     .price {

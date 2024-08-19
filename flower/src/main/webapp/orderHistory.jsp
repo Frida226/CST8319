@@ -58,7 +58,11 @@
         }
         .btn:hover {
             background-color: #0056b3;
-        }
+        }       
+        .button-container {
+   			text-align: center;
+    		margin-bottom: 120px;
+   		}
     </style>
 </head>
 
@@ -133,7 +137,9 @@
             %>
         </tbody>
     </table>
-    <a href="index.jsp" class="btn btn-secondary">Back to Home</a>
+    <div class="button-container">
+    	<a href="index.jsp" class="btn btn-secondary">Back to Home</a>
+	</div>
 <jsp:include page="footer.jsp" />
 </body>
 </html>

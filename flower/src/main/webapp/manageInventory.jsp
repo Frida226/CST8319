@@ -37,18 +37,18 @@
         }
 
         /* Sub heading */
-        h2 {
-            text-align: center;
-            font-size: 24px; /* smaller font */
-            color: #333333; /* dark font */
-            background-color: #f0ad4e; /* orange BG */
-            padding: 10px;
-            border-radius: 8px; /* round corner */
-            font-family: 'Georgia', serif; /* change font */
-            margin-top: 10px;
-			width: auto; /* Set width to auto */
-            display: inline-block;
-        }
+       h2 {
+    		text-align: center;
+   			font-size: 22px; 
+		    color: #ffffff; 
+		    background-color: #5cb85c; 
+		    padding: 8px 16px; 
+		    border-radius: 5px;
+		    font-family: 'Arial', sans-serif; 
+		    margin-top: 20px; 
+		    display: inline-block;
+		    margin-left:80px
+		}
 
         form {
             width: 60%;
@@ -91,34 +91,26 @@
 
         /* Modify 'View All Product Items' button style */
         .btn-info {
-/*             display: block;
-            width: 80%
-            margin: 20px auto; /* center */
-            background-color: #FF9800; /* orange */
-            color: white; /* white font for clear display */
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            transition: background-color 0.3s ease; */
-            
-            text-align: center;
-            font-size: 24px; /* smaller font */
-            color: #333333; /* dark font */
-            background-color: #f0ad4e; /* orange BG */
-            padding: 10px;
-            border-radius: 8px; /* round corner */
-            font-family: 'Georgia', serif; /* change font */
-            margin-top: 10px;            
-            width: auto; /* Set width to auto */
-            display: inline-block; /* Make buttons inline */        
-        }
+		    text-align: center;
+		    font-size: 18px;
+		    color: #ffffff; 
+		    background-color: #5cb85c; 
+		    padding: 10px 20px; 
+		    border: none;
+		    border-radius: 5px; 
+		    font-family: 'Arial', sans-serif; 
+		    margin-top: 10px;
+		    display: inline-block; 
+		    cursor: pointer; 
+		    text-decoration: none; 
+		    transition: background-color 0.3s ease; 
+		    width: auto; 
+		    margin-left:80px
+		}
 
-        .btn-info:hover {
-            background-color: #e68900; /* darker organge */
-        }
+		.btn-info:hover {
+		    background-color: #4cae4c; 
+		}
         
         table {
             width: 80%;
@@ -144,9 +136,7 @@
             background-color: #FF0000; /* red */
             color: white; 
             padding: 0; 
-
             font-size: 1em; /* Modify font size */ 
-
         }
 
         input[type="submit"][value="Delete"]:hover {
@@ -156,7 +146,8 @@
         .edit-btn {
             background-color: #2196F3;
             color: white;
-            padding: 5px 10px;
+            text-align: center;
+            padding: 0.5px 10px;
             border: none;
             border-radius: 4px;
             text-decoration: none;
@@ -186,7 +177,10 @@
         .return-btn:hover {
             background-color: #0056b3;
         }
-        
+        .button-container {
+   			text-align: center;
+    		margin-bottom: 60px;
+   		}       
     </style>
 </head>
 <body>
@@ -246,8 +240,10 @@
                         <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
                         <input type="submit" value="Delete">
                     </form>
+                    <form>
                    <%--  <button onclick="populateEditForm(<%= product.getProduct_id() %>)">Edit</button> --%>
                     <a href="manageInventory?action=edit&product_id=<%= product.getProduct_id() %>" class="edit-btn">Edit</a>
+                    </form>
                 </td>
             </tr>
             <% 
@@ -263,7 +259,8 @@
             // This could also be implemented by showing a modal or separate page
         }
     </script>
-    
-   	<a href="admin.jsp" class="return-btn">Return to Admin Dashboard</a>
+    <div class="button-container">
+   		<a href="admin.jsp" class="return-btn">Return to Admin Dashboard</a>
+   	</div>
 </body>
 </html>
