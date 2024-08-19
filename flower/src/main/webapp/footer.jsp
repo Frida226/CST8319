@@ -14,7 +14,7 @@
         <nav>
        	    <a href="index.jsp">Home</a>
         	<a href="about.jsp">About</a>
-        	<a href="shop.jsp">Shop</a>
+        	<a href="guides.jsp">Guides</a>
         	<a href="contact.jsp">Contact</a>
             <a href="terms.jsp">Terms of Service</a>
         </nav>

@@ -43,7 +43,7 @@
             <a href="view_page.jsp?pid=<%= product.getProduct_id() %>" class="fas fa-eye"></a>
             <div class="price">$<%= product.getPrice() %>/-</div>
           <%--   <img src="uploaded_img/<%= product.getImage_url() %>" alt="Image not found" class="image"> --%>
-            <img src="<%= product.getImage_url() %>" alt="Image not found" class="image">
+            <img src="<%= product.getImage_url() %>" alt="Image not found" width="200" height="200" class="image">
             <div class="name"><%= product.getName() %></div>
             
 
@@ -56,11 +56,11 @@
                 <input type="hidden" name="product_image" value="<%= product.getImage_url() %>">
                 
                 <!-- Add to Wishlist Button -->
-                <input type="submit" value="Add to Wishlist" class="option-btn">
+                <input type="submit" value="Add to Wishlist" class="option-btn" style="margin-left: 80px;">
             </form>
 
             <!-- Form for Add to Cart -->
-            <form action="Cart" method="POST" class="action-form">
+            <form action="Cart" method="POST" class="action-form" >
                 <input type="hidden" name="action" value="addToCart">  <!-- add action parameter -->
                 <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
                 <input type="hidden" name="product_name" value="<%= product.getName() %>">
@@ -68,10 +68,10 @@
                 <input type="hidden" name="product_image" value="<%= product.getImage_url() %>">
                 
                 <!-- Quantity Selector for Cart -->
-                <input type="number" name="product_quantity" value="1" min="1" class="qty">
+                <input type="number" name="product_quantity" value="1" min="1" class="qty" style="margin-left: 115px;">
                 
                 <!-- Add to Cart Button -->
-                <input type="submit" value="Add to Cart" class="btn">
+                <input type="submit" value="Add to Cart" class="btn" style="margin-left: 80px;">
             </form>
         </div>
         <%
@@ -83,9 +83,9 @@
             }
         %>
     </div>
-    <div class="more-btn">
+<!--    <div class="more-btn">
         <a href="shop.jsp" class="option-btn">Load More</a>
-    </div>
+    </div> -->
 </section>
 
 
