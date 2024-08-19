@@ -9,6 +9,7 @@ CREATE TABLE users (
     email VARCHAR(100) NOT NULL UNIQUE,
     first_name VARCHAR(50) NULL,
     last_name VARCHAR(50) NULL,
+    
     address TEXT NULL,
     phone_number VARCHAR(20) NULL,
     role ENUM('admin', 'user') DEFAULT 'user',
