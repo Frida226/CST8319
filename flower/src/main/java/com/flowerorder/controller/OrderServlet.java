@@ -24,6 +24,7 @@ import java.util.List;
 public class OrderServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private OrderDao orderDao = new OrderDaoImpl();
+    private UsersDao userDao = new UsersDaoImpl();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -112,6 +113,8 @@ public class OrderServlet extends HttpServlet {
             updateOrderStatus(request, response);
         } else if ("delete".equals(action)) {
             deleteOrder(request, response);
+        } else if ("sendEmail".equals(action)) {
+        	processSendEmail(request, response);
         }
     }
 
@@ -194,10 +197,8 @@ public class OrderServlet extends HttpServlet {
         }
     }
 
-    
-
-
-    
+ 
+ 
     private void updateOrderStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int orderId = Integer.parseInt(request.getParameter("order_id"));
         String status = request.getParameter("status");
@@ -207,6 +208,7 @@ public class OrderServlet extends HttpServlet {
         response.sendRedirect("order?action=view");
     }
 
+    
     private void deleteOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int orderId = Integer.parseInt(request.getParameter("order_id"));
 
@@ -218,4 +220,28 @@ public class OrderServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to delete order.");
         }
     }
+    
+   
+    private void processSendEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+//        String userEmail = (String) session.getAttribute("user_email"); // obtain user_email from session. make sense?
+        Integer userId = (Integer) session.getAttribute("user_id");
+        int orderId = Integer.parseInt(request.getParameter("order_id"));
+
+        String userEmail = userDao.getUserEmailById(userId);
+        simulateSendOrderConfirmationEmail(userEmail, orderId);
+
+        request.setAttribute("message", "Order confirmation email has been sent to " + userEmail);
+
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("order.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    private void simulateSendOrderConfirmationEmail(String userEmail, int orderId) {
+        System.out.println("Sending order confirmation email to: " + userEmail);
+        System.out.println("Order ID: " + orderId);
+    }
+
+    
 }

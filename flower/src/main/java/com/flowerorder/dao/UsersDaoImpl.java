@@ -151,6 +151,27 @@ public class UsersDaoImpl implements UsersDao {
 
         return usersList;
     }
+    
+    @Override   
+    public String getUserEmailById(Integer userId) {
+        String email = null;
+        String sql = "SELECT email FROM users WHERE user_id = ?";
+        
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                email = rs.getString("email");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return email;
+    }
+
 }
 
 

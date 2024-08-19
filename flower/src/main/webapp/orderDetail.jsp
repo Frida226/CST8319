@@ -76,6 +76,10 @@
         </ul>
 
         <p>We will send you an email confirmation shortly with the order details.</p>
+        
+        <c:if test="${not empty message}">
+        	<p style="color: green; font-weight: bold;">${message}</p>
+    	</c:if>
 
         <a href="cart.jsp" class="btn btn-primary">Back to Cart</a>
         <a href="index.jsp" class="btn btn-secondary">Back to Home</a>
@@ -84,10 +88,12 @@
 		    <input type="hidden" name="action" value="history">
 		    <input type="submit" value="Check Order History" class="btn btn-info">
 		</form>
-        <form action="SendOrderEmailServlet" method="post">
-            <input type="hidden" name="order_id" value="${order_id}">
-            <input type="submit" class="btn btn-success" value="Checkout and Send Email">
-        </form>
+		
+    	<form action="order" method="post">
+        	<input type="hidden" name="action" value="sendEmail">
+        	<input type="hidden" name="order_id" value="${order_id}">
+        	<input type="submit" class="btn btn-success" value="Send Email">
+    	</form>
         
     </div>
 <jsp:include page="footer.jsp" />

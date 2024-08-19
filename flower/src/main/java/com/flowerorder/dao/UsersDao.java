@@ -14,4 +14,5 @@ public interface UsersDao {
 	int getUserIdFromUserName(String username);
     Users getUserProfile(String username) throws SQLException;
 	List<Users> getAllUsers();
+	String getUserEmailById(Integer userId);
 }
