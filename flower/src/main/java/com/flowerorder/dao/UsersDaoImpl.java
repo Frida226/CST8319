@@ -77,7 +77,6 @@ public class UsersDaoImpl implements UsersDao {
         }
         return null;
     }
-<<<<<<< HEAD
 
     
     @Override
@@ -101,7 +100,6 @@ public class UsersDaoImpl implements UsersDao {
     }
 
     
-=======
     
     @Override
     public int getUserIdFromUserName(String username) {
@@ -150,7 +148,6 @@ public class UsersDaoImpl implements UsersDao {
 
     }
 
->>>>>>> stash
 }
 
 

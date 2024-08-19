@@ -6,22 +6,6 @@ public class Cart {
     private int product_id;
     private int quantity;
 
-    
-<<<<<<< HEAD
-
-    public Cart(int user_id, int product_id, int quantity) {
-        this.user_id = user_id;
-        this.product_id = product_id;
-        this.quantity = quantity;
-    }
-    
-=======
-    public Cart(int user_id, int product_id, int quantity) {
-        this.user_id = user_id;
-        this.product_id = product_id;
-        this.quantity = quantity;
-    }
->>>>>>> stash
     // Getters and setters
     public int getCart_id() {
         return cart_id;
@@ -55,4 +39,3 @@ public class Cart {
         this.quantity = quantity;
     }
 }
-
