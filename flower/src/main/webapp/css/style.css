@@ -596,3 +596,14 @@ input.qty {
 .form-submit:hover {
     background-color: #ceceff;
 }
+
+
+.care-info {
+    padding: 20px;
+    background-color: #f9f9f9; 
+    margin-bottom: 20px; 
+}
+
+.tip-detail1 {
+	margin-bottom: 100px; 
+}
