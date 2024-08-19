@@ -37,7 +37,7 @@
     .btn-remove {
         background-color: #f44336;
         color: white;
-        border: none;
+        border: none; 
         padding: 10px;
         cursor: pointer;
     }

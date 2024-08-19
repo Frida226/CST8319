@@ -39,7 +39,11 @@
             if (products != null && !products.isEmpty()) {
                 for (Products product : products) {
         %>
+<<<<<<< HEAD
 		<form action="CartServlet" method="POST" class="box">
+=======
+        <form method="POST" class="box productForm">
+>>>>>>> stash
             <a href="view_page.jsp?pid=<%= product.getProduct_id() %>" class="fas fa-eye"></a>
             <div class="price">$<%= product.getPrice() %>/-</div>
             <img src="<%= product.getImage_url() %>" alt="" class="image">
@@ -49,10 +53,16 @@
             <input type="hidden" name="product_name" value="<%= product.getName() %>">
             <input type="hidden" name="product_price" value="<%= product.getPrice() %>">
             <input type="hidden" name="product_image" value="<%= product.getImage_url() %>">
+<<<<<<< HEAD
             <input type="submit" value="Add to Wishlist" class="option-btn">
             <input type="hidden" name="action" value="addToCart">
             <input type="submit"  value="Add to Cart" class="btn">
+=======
+            <input type="submit" value="Add to Wishlist" class="option-btn addToWishlist">
+            <input type="submit" value="Add to Cart" class="btn addToCart">
+>>>>>>> stash
         </form>
+
         <%
                 }
             } else {
@@ -76,7 +86,15 @@
 </section>
 
 <jsp:include page="footer.jsp" />
-
+<script>
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('addToWishlist')) {
+            event.target.closest('form').action = 'wishlist';
+        } else if (event.target.classList.contains('addToCart')) {
+            event.target.closest('form').action = 'Cart';
+        }
+    });
+</script>
 </body>
 
 </html>

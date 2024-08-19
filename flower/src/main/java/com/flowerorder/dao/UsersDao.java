@@ -8,5 +8,9 @@ public interface UsersDao {
     Users login(String username) throws SQLException;
 	boolean registerAdmin(Users admin)throws SQLException;
     int getUserIdByUserName(String userName)throws SQLException;
+	int getUserIdFromUserName(String username);
+    Users getUserProfile(String username) throws SQLException;
+
 }
+
 
