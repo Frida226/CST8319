@@ -39,19 +39,41 @@
             if (products != null && !products.isEmpty()) {
                 for (Products product : products) {
         %>
-		<form action="wishlist" method="POST" class="box">
+        <div class="box">
             <a href="view_page.jsp?pid=<%= product.getProduct_id() %>" class="fas fa-eye"></a>
             <div class="price">$<%= product.getPrice() %>/-</div>
-            <img src="uploaded_img/<%= product.getImage_url() %>" alt="" class="image">
+          <%--   <img src="uploaded_img/<%= product.getImage_url() %>" alt="Image not found" class="image"> --%>
+            <img src="<%= product.getImage_url() %>" alt="Image not found" class="image">
             <div class="name"><%= product.getName() %></div>
-            <input type="number" name="product_quantity" value="1" min="0" class="qty">
-            <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
-            <input type="hidden" name="product_name" value="<%= product.getName() %>">
-            <input type="hidden" name="product_price" value="<%= product.getPrice() %>">
-            <input type="hidden" name="product_image" value="<%= product.getImage_url() %>">
-            <input type="submit" value="Add to Wishlist" class="option-btn">
-            <input type="submit" value="Add to Cart" class="btn">
-        </form>
+            
+
+            <!-- Form for Add to Wishlist -->
+            <form action="wishlist" method="POST" class="action-form">
+                <input type="hidden" name="action" value="addToWishlist"> <!-- froget to add initially -->
+                <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
+                <input type="hidden" name="product_name" value="<%= product.getName() %>">
+                <input type="hidden" name="product_price" value="<%= product.getPrice() %>">
+                <input type="hidden" name="product_image" value="<%= product.getImage_url() %>">
+                
+                <!-- Add to Wishlist Button -->
+                <input type="submit" value="Add to Wishlist" class="option-btn">
+            </form>
+
+            <!-- Form for Add to Cart -->
+            <form action="Cart" method="POST" class="action-form">
+                <input type="hidden" name="action" value="addToCart">  <!-- add action parameter -->
+                <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
+                <input type="hidden" name="product_name" value="<%= product.getName() %>">
+                <input type="hidden" name="product_price" value="<%= product.getPrice() %>">
+                <input type="hidden" name="product_image" value="<%= product.getImage_url() %>">
+                
+                <!-- Quantity Selector for Cart -->
+                <input type="number" name="product_quantity" value="1" min="1" class="qty">
+                
+                <!-- Add to Cart Button -->
+                <input type="submit" value="Add to Cart" class="btn">
+            </form>
+        </div>
         <%
                 }
             } else {
@@ -66,6 +88,8 @@
     </div>
 </section>
 
+
+
 <section class="home-contact">
     <div class="content">
         <h3>Have Any Questions?</h3>
@@ -75,6 +99,17 @@
 </section>
 
 <jsp:include page="footer.jsp" />
+
+<!--added script to trigger add addToWishlist & addToCart actions  -->
+<!-- <script>
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('addToWishlist')) {
+            event.target.closest('form').action = 'wishlist';
+        } else if (event.target.classList.contains('addToCart')) {
+            event.target.closest('form').action = 'Cart';
+        }
+    });
+</script> -->
 
 </body>
 </html>

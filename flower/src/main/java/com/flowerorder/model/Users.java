@@ -33,10 +33,21 @@ public class Users {
 	}
 
 	
-	public Users(String username, String passwordHash,Role role) {
+	public Users(int user_id, String username, Role role) {
+    	this.user_id = user_id;
 		this.username = username;
-		this.passwordHash = passwordHash;
 		this.role = role;
+	}
+	
+	public Users(int user_id, String username, String passwordHash, Role role) {
+	    this.user_id = user_id;
+	    this.username = username;
+	    this.passwordHash = passwordHash;
+	    this.role = role;
+	}
+
+	public Users() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getId() {

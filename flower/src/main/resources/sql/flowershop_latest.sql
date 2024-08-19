@@ -62,6 +62,25 @@ CREATE TABLE wishlist (
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
+-- Create the featured_products table
+CREATE TABLE featured_products (
+    featured_product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT,
+    start_date DATE,
+    end_date DATE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
+-- Create the special_offers table
+CREATE TABLE special_offers (
+    special_offer_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT,
+    discount_percentage DECIMAL(5,2),
+    start_date DATE,
+    end_date DATE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
 -- Create the cart table
 CREATE TABLE cart (
     cart_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -71,6 +90,21 @@ CREATE TABLE cart (
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
+
+-- Create the reviews table
+CREATE TABLE reviews (
+    review_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT,
+    user_id INT,
+    rating INT,
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(product_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+--------------------------------------
+USE flowershop;
 
 -- Insert data into users table
 INSERT INTO users (username, password_hash, email, first_name, last_name, address, phone_number, role) VALUES
@@ -99,7 +133,22 @@ INSERT INTO wishlist (user_id, product_id) VALUES
 (1, 3),
 (2, 1);
 
+-- Insert data into featured_products table
+INSERT INTO featured_products (product_id, start_date, end_date) VALUES
+(1, '2024-07-01', '2024-07-31'),
+(2, '2024-08-01', '2024-08-31');
+
+-- Insert data into special_offers table
+INSERT INTO special_offers (product_id, discount_percentage, start_date, end_date) VALUES
+(3, 10.00, '2024-07-15', '2024-07-31'),
+(2, 15.00, '2024-08-01', '2024-08-15');
+
 -- Insert data into cart table
 INSERT INTO cart (user_id, product_id, quantity) VALUES
 (1, 1, 2),
 (2, 3, 1);
+
+-- Insert data into reviews table
+INSERT INTO reviews (product_id, user_id, rating, comment) VALUES
+(1, 1, 5, 'Absolutely beautiful!'),
+(2, 2, 4, 'Very nice, but could be a bit more vibrant.');

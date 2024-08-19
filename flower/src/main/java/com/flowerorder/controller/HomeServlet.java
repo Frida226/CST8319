@@ -41,7 +41,7 @@ public class HomeServlet extends HttpServlet {
         String userRole = (String) session.getAttribute("role");
 //        String userRole = ((Role) session.getAttribute("role")).name();
 
-        System.out.println("User Role from Session: " + userRole);// verify the Role get from the previous session!
+//        System.out.println("User Role from Session: " + userRole);// verify the Role get from the previous session!
     	List<Products> products = productsDao.listAllProductItemsByUser(userRole);
     	// Set the products as a request attribute to be accessible in the JSP
         request.setAttribute("products", products);

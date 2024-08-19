@@ -1,0 +1,30 @@
+How to initial an admin because I need use this admin to login "admin dashboard" page?
+Until clicking the "Add New Admin" tab, could you enter the admin registration page to create a new admin.
+Currently I have some issue that the new created Admin cannot login with his username and password need to figure out later.
+
+To handle all the whole process as an admin role, such as Manage Inventory, Process orders, , please use below method to initially create an admin!
+
+1. populate data to the users as an admin in database(MySQL). EXAMPLE:
+INSERT INTO users (username, password_hash, email, role) VALUES
+('testAdmin', '1234', 'testAdmin@gmail.com', 'admin');
+PS: Here you only use plain password
+
+2.create below PasswordHashingExample.java class (under, such a security package) and run it
+import org.mindrot.jbcrypt.BCrypt;
+
+public class PasswordHashingExample {
+    public static void main(String[] args) {
+        String plainPassword = "1234";  
+        String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());  
+        System.out.println("Hashed Password: " + hashedPassword);
+    }
+}
+
+3. get the Hashed Password from console:
+My output is:
+Hashed Password: $2a$10$FiD/a2gnRys088lGAdobjO8hdhkbBG8cdbd.JyM7eprOMVmgviE1m
+
+4. update the admin data in MySQL with:
+SET password _hash = '$2a$10$FiD/a2gnRys088lGAdobjO8hdhkbBG8cdbd.JyM7eprOMVmgviE1m' WHERE username = 'testAdmin' AND role = 'Admin';
+
+5. on the login page, input with "testAdmin" and "1234", then you can login admin dashboard successfully!

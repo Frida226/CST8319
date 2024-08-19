@@ -13,7 +13,7 @@ public class ProductsDaoImpl implements ProductsDao {
 	public List<Products> listAllProductItemsByUser(String userRole){
 		List<Products> products = new ArrayList<>();
 		String sql = buildQueryBasedOnUserType(userRole);
-		System.out.println("Executing SQL: " + sql); //add logging!
+//		System.out.println("Executing SQL: " + sql); //add logging!
 	    try (Connection con = DBConnection.getConnection();   		
 	            PreparedStatement pst = con.prepareStatement(sql)) {	           
 	           ResultSet rs = pst.executeQuery();
@@ -134,4 +134,23 @@ public class ProductsDaoImpl implements ProductsDao {
         }
     }
 
+    @Override
+    public String getProductNameById(int productId) {
+        String productName = null;
+        String query = "SELECT name FROM products WHERE product_id = ?";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setInt(1, productId);
+            
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                productName = rs.getString("name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return productName;
+    }
 }

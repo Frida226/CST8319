@@ -14,6 +14,180 @@
     <meta charset="UTF-8">
     <title>Manage Inventory</title>
     <link rel="stylesheet" href="css/style.css">
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+        /* Main heading*/
+        h1 {
+            text-align: center;
+            font-size: 36px; /* larger font  */
+
+            background-color: #81C784;
+            color: white;
+            padding: 15px;
+            border-radius: 8px; /* round corner */
+            margin-top: 20px;
+        }
+
+        /* Sub heading */
+        h2 {
+            text-align: center;
+            font-size: 24px; /* smaller font */
+            color: #333333; /* dark font */
+            background-color: #f0ad4e; /* orange BG */
+            padding: 10px;
+            border-radius: 8px; /* round corner */
+            font-family: 'Georgia', serif; /* change font */
+            margin-top: 10px;
+			width: auto; /* Set width to auto */
+            display: inline-block;
+        }
+
+        form {
+            width: 60%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"], .btn {
+/*             background-color: #4CAF50; */
+            background-color: #007BFF; /* blue */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover, .btn:hover {
+         /*    background-color: #45a049; */
+         	background-color: #0056b3; /* dark blue when hover */
+        }
+
+        /* Modify 'View All Product Items' button style */
+        .btn-info {
+/*             display: block;
+            width: 80%
+            margin: 20px auto; /* center */
+            background-color: #FF9800; /* orange */
+            color: white; /* white font for clear display */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease; */
+            
+            text-align: center;
+            font-size: 24px; /* smaller font */
+            color: #333333; /* dark font */
+            background-color: #f0ad4e; /* orange BG */
+            padding: 10px;
+            border-radius: 8px; /* round corner */
+            font-family: 'Georgia', serif; /* change font */
+            margin-top: 10px;            
+            width: auto; /* Set width to auto */
+            display: inline-block; /* Make buttons inline */        
+        }
+
+        .btn-info:hover {
+            background-color: #e68900; /* darker organge */
+        }
+        
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Moddify style of 'Delete' button */
+        input[type="submit"][value="Delete"] {
+            background-color: #FF0000; /* red */
+            color: white; 
+            padding: 0; 
+
+            font-size: 1em; /* Modify font size */ 
+
+        }
+
+        input[type="submit"][value="Delete"]:hover {
+            background-color: #CC0000; /* dark red */
+        }
+
+        .edit-btn {
+            background-color: #2196F3;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .edit-btn:hover {
+            background-color: #0b7dda;
+        }
+        
+        /* Add style of 'return button' */
+        .return-btn {
+            display: block;
+            margin: 40px auto 20px; /* locate at bottom */
+            background-color: #007BFF; /* blue BG */
+            color: white; 
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: auto; /* Set width to auto */
+            display: inline-block; /* Make buttons inline */            
+        }
+
+        .return-btn:hover {
+            background-color: #0056b3;
+        }
+        
+    </style>
 </head>
 <body>
     <h1>Manage Inventory</h1>
@@ -89,5 +263,7 @@
             // This could also be implemented by showing a modal or separate page
         }
     </script>
+    
+   	<a href="admin.jsp" class="return-btn">Return to Admin Dashboard</a>
 </body>
 </html>

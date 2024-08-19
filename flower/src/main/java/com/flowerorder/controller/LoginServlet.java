@@ -32,17 +32,18 @@ public class LoginServlet extends HttpServlet {
             Users loginUser = usersDao.login(uname);//take a special name show its login function!
             if(loginUser != null && checkPassword(upwd, loginUser.getPasswordHash())){
                 String roleStr = loginUser.getRole().name(); // retrieve Enum type name
-                System.out.println("Role from loginUser: " + roleStr);
+//                System.out.println("Role from loginUser: " + roleStr);
             	
                 session.setAttribute("name", loginUser.getUsername());
                 session.setAttribute("role", roleStr); // Store Role enum directly which is INCORRECT action!!
+                session.setAttribute("user_id", loginUser.getId());// Set user_id in session!!
  
 
                 if ("ADMIN".equals(roleStr)){// remove getParameter("role")
-                    System.out.println("Attempting to dispatch to admin.jsp");
+//                    System.out.println("Attempting to dispatch to admin.jsp");
                     dispatcher = request.getRequestDispatcher("admin.jsp");
                 } else if ("USER".equals(roleStr)) {
-                	System.out.println("Attempting to dispatch to index.jsp");
+//                	System.out.println("Attempting to dispatch to index.jsp");
                     dispatcher = request.getRequestDispatcher("index.jsp");
                 }
                 

@@ -36,9 +36,9 @@ public class AdminRegistrationServlet extends HttpServlet {
         try {
             boolean result = usersDao.registerAdmin(admin);
             if (result) {
-                response.sendRedirect("admin.jsp?status=success");
+            	response.sendRedirect("admin.jsp?status=success");
             } else {
-                response.sendRedirect("admin.jsp?status=failed");
+            	response.sendRedirect("admin.jsp?status=failed");
             }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Admin registration error", e);
