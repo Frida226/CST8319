@@ -3,6 +3,7 @@ package com.flowerorder.controller;
 import com.flowerorder.dao.*;
 import com.flowerorder.dao.OrderDaoImpl;
 import com.flowerorder.model.Orders;
+import com.flowerorder.util.EmailUtil;
 import com.flowerorder.model.CartItem;
 import com.flowerorder.model.OrderItems;
 
@@ -221,6 +222,23 @@ public class OrderServlet extends HttpServlet {
         }
     }
     
+    
+    private void processSendEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("user_id");
+        int orderId = Integer.parseInt(request.getParameter("order_id"));
+
+        String userEmail = userDao.getUserEmailById(userId);
+        Orders order = orderDao.getOrdersByOrderId(orderId); // Assuming you have a method to get the order by ID
+        EmailUtil.sendOrderConfirmationEmail(userEmail, order);
+
+        request.setAttribute("message", "Order confirmation email has been sent to " + userEmail);
+
+        response.sendRedirect("home");
+    }
+
+    
+    /*
    
     private void processSendEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -242,6 +260,6 @@ public class OrderServlet extends HttpServlet {
         System.out.println("Sending order confirmation email to: " + userEmail);
         System.out.println("Order ID: " + orderId);
     }
-
+*/
     
 }

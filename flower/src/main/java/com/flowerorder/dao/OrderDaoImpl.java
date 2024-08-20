@@ -14,11 +14,12 @@ public class OrderDaoImpl implements OrderDao {
     public void createOrder(Orders orders) {
         String insertOrderSQL = "INSERT INTO orders (user_id, total_price, order_status, shipping_address, payment_method, created_at) VALUES (?, ?, ?, ?, ?, ?)";
         String insertOrderItemSQL = "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
+        String deleteCartItemsItemSQL = "Delete From Cart where user_Id = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement orderStmt = conn.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS);
+    		 PreparedStatement cartStat = conn.prepareStatement(deleteCartItemsItemSQL);
              PreparedStatement itemStmt = conn.prepareStatement(insertOrderItemSQL)) {
-
             conn.setAutoCommit(false); // Open commitment
 
             // Insert orders
@@ -47,6 +48,8 @@ public class OrderDaoImpl implements OrderDao {
                 }
                 itemStmt.executeBatch();
             }
+            cartStat.setInt(1, orders.getUser_id());
+            cartStat.executeUpdate();
 
             conn.commit(); // Commit transaction
         } catch (SQLException e) {

@@ -41,7 +41,8 @@ public class UsersDaoImpl implements UsersDao {
 
     @Override
     public boolean registerAdmin(Users admin) throws SQLException {
-        String query = "INSERT INTO users (username, password_hash, email, role ) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO users (username, password_hash, email, phone_number, first_name, last_name, role) VALUES (?, ?, ?, '', '', '', ?)";
+        //String query = "INSERT INTO users (username, password_hash, email, role ) VALUES (?, ?, ?, ?)";
         try (
             Connection con = DBConnection.getConnection();
             PreparedStatement pst = con.prepareStatement(query)) {
