@@ -145,12 +145,12 @@
                             <input type="email" name="email" id="email" placeholder="example@gmail.com" required/>
                         </div>
                         <div class="form-group">
-                            <label for="pass"></label>
-                            <input type="password" name="pass" id="pass" placeholder="Password" required/>
+                            <label for="password"></label>
+                            <input type="password" name="password" id="password" placeholder="password" required/>
                         </div>
             			<div class="form-group">
-                            <label for="re-pass"></label>
-                            <input type="password" name="re_pass" id="re_pass"
+                            <label for="re-password"></label>
+                            <input type="password" name="re_password" id="re_password"
                                 placeholder="Repeat your password" required/>
                         </div>
                         <div class="form-group form-button">
@@ -162,7 +162,6 @@
                     <figure>
                         <img src="images/signup-image.jpg" alt="sign up image">
                     </figure>
-                    <a href="login.jsp" class="signup-image-link">I am already a admin</a>
                 </div>
             </div>
         </div>
@@ -173,8 +172,8 @@
     function validateForm() {
         var username = document.getElementById("username").value;
         var email = document.getElementById("email").value;
-        var password = document.getElementById("pass").value;
-        var rePassword = document.getElementById("re_pass").value;
+        var password = document.getElementById("password").value;
+        var rePassword = document.getElementById("re_password").value;
 
         if (username.trim() === "") {
             alert("Please enter a username.");
